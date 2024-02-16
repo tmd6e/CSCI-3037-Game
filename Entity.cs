@@ -11,8 +11,8 @@ public class Entity
     }
 
     // Actions
-    public virtual void Attack(Entity target, int damage)
+    public virtual void Damage(int damage)
     {
-        target.Health -= damage;
+        health -= damage;
     }
 }
