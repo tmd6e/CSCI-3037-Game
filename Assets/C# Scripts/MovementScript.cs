@@ -6,7 +6,8 @@ public class MovementScript : MonoBehaviour
     public float walkingSpeed = 5.0f;
     public float sprintSpeed = 10.0f;
     public float sensitivity = 2.0f;
-    public float gravityForce = 9.81f;
+    public int jumpHeight = 5;
+    public bool isDead = false;
     //Reference game objects
     public GameObject playerCamera;
     public Animator animator;
@@ -17,9 +18,6 @@ public class MovementScript : MonoBehaviour
     //Flags
     private bool isSprinting = false;
     private bool isJumping = false;
-
-    //Checks ground for jumping
-    private GroundCheck groundCheck;
     //Player game object
     public GameObject characterObject;
     //Player's current speed
@@ -30,51 +28,57 @@ public class MovementScript : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        groundCheck = characterObject.GetComponent<GroundCheck>();
     }
 
     void Update()
     {
-        // Get input for movement
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        bool isMoving = (horizontalInput != 0 || verticalInput != 0);
+        //As long as the player is not dead
+        if (!isDead)
+            {
+                // Get input for movement
+                float horizontalInput = Input.GetAxis("Horizontal");
+                float verticalInput = Input.GetAxis("Vertical");
+                bool isMoving = (horizontalInput != 0 || verticalInput != 0);
 
-        // Calculate the movement direction based on the input
-        Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
-        moveDirection = transform.TransformDirection(moveDirection);
+                // Calculate the movement direction based on the input
+                Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
+                moveDirection = transform.TransformDirection(moveDirection);
 
-        // Check if the Shift key is held down
-        bool isSprintKeyHeld = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                // Check if the Shift key is held down
+                bool isSprintKeyHeld = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
-        // Determine the current movement speed
-        if (isSprintKeyHeld && Input.GetKey(KeyCode.E))
-        {
-            currentSpeed = sprintSpeed * 10;
-        }
-        else if (isSprintKeyHeld)
-        {
-            currentSpeed = sprintSpeed;
-        }
-        else {
-            currentSpeed = walkingSpeed;
-        }
+                if (Input.GetKeyDown(KeyCode.Space)){
+                }
 
-        // Move the character
-        controller.Move(moveDirection * currentSpeed * Time.deltaTime);
+                // Determine the current movement speed
+                if (isSprintKeyHeld && Input.GetKey(KeyCode.E))
+                {
+                    currentSpeed = sprintSpeed * 10;
+                }
+                else if (isSprintKeyHeld)
+                {
+                    currentSpeed = sprintSpeed;
+                }
+                else
+                {
+                    currentSpeed = walkingSpeed;
+                }
+
+                // Move the character
+                controller.SimpleMove(moveDirection * currentSpeed);
 
 
-        // Handle mouse rotation for the camera view
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
+                // Handle mouse rotation for the camera view
+                float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+                float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-        rotationX -= mouseY * .1f;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+                rotationX -= mouseY * .1f;
+                rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
-        transform.Rotate(Vector3.up * mouseX);
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            // Update the sprint state
-            isSprinting = isSprintKeyHeld;
+                transform.Rotate(Vector3.up * mouseX);
+                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+                // Update the sprint state
+                isSprinting = isSprintKeyHeld;
+            }
         }
     }

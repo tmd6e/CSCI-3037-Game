@@ -10,6 +10,9 @@ public class Player : Entity
     float attackMultiplier = 1.0f;
     float attackSpeedMultiplier = 1.0f;
     float maxHPMultiplier = 1.0f;
+    MovementScript movementScript;
+    MeshRenderer meshRenderer;
+    Rigidbody rb;
 
     void PowerupGained()
     {
@@ -22,5 +25,29 @@ public class Player : Entity
         attackPower = (int) (15 * attackMultiplier);
         health = (int)(100 * maxHPMultiplier);
 
+    }
+
+    //Player will get hit by enemy hitboxes
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            Entity referenceEntity = other.gameObject.GetComponent<Entity>();
+            health -= referenceEntity.attackPower;
+            Debug.Log("Hit");
+        }
+    }
+    private void Start()
+    {
+        movementScript = GetComponent<MovementScript>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        rb = GetComponent<Rigidbody>();
+    }
+    private void Update()
+    {
+        if (health <= 0) {
+            movementScript.isDead = true;
+            meshRenderer.enabled = false;
+        }
     }
 }

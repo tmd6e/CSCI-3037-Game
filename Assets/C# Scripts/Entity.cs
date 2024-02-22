@@ -1,9 +1,15 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Entity
+public class Entity : MonoBehaviour
 {
-    public int health { get; set; }
-    public int attackPower { get; set; }
+    public int health = 100;
+    public int attackPower = 50;
+    protected Collider collider;
+    public GameObject referencedGameObject;
+
+    /*
     // Default constructor
     public Entity()
     {
@@ -16,13 +22,22 @@ public class Entity
         health = newHealth;
         attackPower = newAttackPower;
     }
-
+    */
     // Actions
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(Entity attacker)
     {
         // Damage will be a placeholder until we figure out how to receive the attacker's attack power for proper damage receival
-        health -= damage;
+        health -= attacker.attackPower;
     }
-    public virtual void DealDamage() { 
+    private void Start()
+    {
+        collider = GetComponent<Collider>();
     }
+    private void Update()
+    {
+        if (health <= 0) {
+            MeshRenderer mr = GetComponent<MeshRenderer>();
+            mr.enabled = false;
+        }
+    }    
 }
