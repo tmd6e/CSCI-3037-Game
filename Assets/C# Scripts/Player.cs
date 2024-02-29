@@ -22,7 +22,10 @@ public class Player : Entity
     }
     void UpdateStats() {
         attackSpeed = attackSpeedMultiplier;
-        attackPower = (int) (15 * attackMultiplier);
+        for (int i = 0; i < attackHitboxes.Length; i++) {
+            attackHitboxes[i].attackPower = (int)(15 * attackMultiplier);
+        }
+        
         health = (int)(100 * maxHPMultiplier);
 
     }
@@ -32,9 +35,8 @@ public class Player : Entity
     {
         if (other.gameObject.layer == 8)
         {
-            Entity referenceEntity = other.gameObject.GetComponent<Entity>();
-            health -= referenceEntity.attackPower;
-            Debug.Log("Hit");
+            Hitbox attackerHitbox = other.gameObject.GetComponent<Hitbox>();
+            health -= attackerHitbox.attackPower;
         }
     }
     private void Start()

@@ -5,8 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public int health = 100;
-    public int attackPower = 50;
-    protected Collider collider;
+    public Hitbox[] attackHitboxes;
     public GameObject referencedGameObject;
 
     /*
@@ -24,14 +23,8 @@ public class Entity : MonoBehaviour
     }
     */
     // Actions
-    public virtual void TakeDamage(Entity attacker)
-    {
-        // Damage will be a placeholder until we figure out how to receive the attacker's attack power for proper damage receival
-        health -= attacker.attackPower;
-    }
     private void Start()
     {
-        collider = GetComponent<Collider>();
     }
     private void Update()
     {
@@ -39,5 +32,5 @@ public class Entity : MonoBehaviour
             MeshRenderer mr = GetComponent<MeshRenderer>();
             mr.enabled = false;
         }
-    }    
+    }
 }
