@@ -5,8 +5,10 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public int health = 100;
-    public Hitbox[] attackHitboxes;
+    public int toughness = 0;
+    public bool toughnessMeter = false;
     public GameObject referencedGameObject;
+    public GameObject objectDestructionFlag;
 
     /*
     // Default constructor
@@ -25,12 +27,9 @@ public class Entity : MonoBehaviour
     // Actions
     private void Start()
     {
+        
     }
     private void Update()
     {
-        if (health <= 0) {
-            MeshRenderer mr = GetComponent<MeshRenderer>();
-            mr.enabled = false;
-        }
     }
 }

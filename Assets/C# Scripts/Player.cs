@@ -5,11 +5,17 @@ using UnityEngine;
 public class Player : Entity
 {
     //Unique stats to the player
+    public PlayerHitbox[] attackHitboxes;
     float attackSpeed = 1.0f;
+    public int toughnessBreak = 10;
     //Values offered by powerup
+    
+    int flatAttackBonus = 0;
+    int flatHPBonus = 0;
     float attackMultiplier = 1.0f;
     float attackSpeedMultiplier = 1.0f;
     float maxHPMultiplier = 1.0f;
+    float toughnessBreakMultiplier = 1.0f;
     MovementScript movementScript;
     MeshRenderer meshRenderer;
     Rigidbody rb;
@@ -22,6 +28,7 @@ public class Player : Entity
     }
     void UpdateStats() {
         attackSpeed = attackSpeedMultiplier;
+        toughness = (int) (10 * toughnessBreakMultiplier);
         for (int i = 0; i < attackHitboxes.Length; i++) {
             attackHitboxes[i].attackPower = (int)(15 * attackMultiplier);
         }

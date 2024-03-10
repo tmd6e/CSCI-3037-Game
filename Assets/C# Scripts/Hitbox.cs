@@ -7,6 +7,7 @@ public class Hitbox : MonoBehaviour
     // Start is called before the first frame update
     private Collider hitbox;
     public int attackPower;
+
     void Start()
     {
         hitbox = GetComponent<Collider>();

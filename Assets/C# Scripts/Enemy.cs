@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    public Hitbox[] attackHitboxes;
     public bool isStationary_ = true;
+    private Animator animator;
     float timeToShoot_ = 1.0f; // In Seconds
     float lastTimeShot_;
 
@@ -17,18 +19,33 @@ public class Enemy : Entity
     // Start is called before the first frame update
     void Start()
     {
-       lastTimeShot_= Time.time;
+        animator = this.gameObject.GetComponent<Animator>();
+        lastTimeShot_ = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (this.health <= 0)
+        {
+            //Play death animation
+            animator.SetBool("isDead", true);
+        }
+        if (objectDestructionFlag.activeSelf)
+        {
+            Destroy(this.gameObject);
+        }
+        if (toughnessMeter && toughness <= 0) {
+            StartCoroutine(ParameterFrameChange("toughnessBroken"));
+            
+        }
         if (!isStationary_) Move();
         if (Time.time - lastTimeShot_ > timeToShoot_)
         {
             lastTimeShot_= Time.time;
             // Shoot();
         }
+
     }
     
     void Shoot(Vector3 startPosition, Quaternion direction, float speed )
@@ -62,5 +79,30 @@ public class Enemy : Entity
         // Basic wander algorithm
     }
 
+    //Hit registration
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 9)
+        {
+            PlayerHitbox attackerHitbox = other.gameObject.GetComponent<PlayerHitbox>();
 
+            // If toughness is up, take reduced damage
+            if (toughnessMeter && toughness > 0)
+            {
+                toughness -= attackerHitbox.PlayerReference.toughnessBreak;
+                health -= (int)(attackerHitbox.attackPower * 0.1);
+            }
+            // When toughness is depleted, take double damage
+            else if (toughnessMeter && toughness <= 0)
+            {
+                health -= (int)(attackerHitbox.attackPower * 2);
+            }
+            else {
+                health -= attackerHitbox.attackPower;
+            }
+        }
+    }
+
+    private IEnumerator ParameterFrameChange(string parameter) {yield return new WaitForSeconds(2.0f);
+    }
 }
