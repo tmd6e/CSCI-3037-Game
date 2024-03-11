@@ -11,6 +11,9 @@ public class CharacterManager : NetworkBehaviour
     [HideInInspector] public CharacterNetworkManager characterNetworkManager;
 
     [Header("Action Flags")]
+    public bool canRotate = true;
+    public bool canMove = true;
+    public bool applyRootMotion = false;
     public bool isPerformingAction = false;
 
     protected virtual void Awake()

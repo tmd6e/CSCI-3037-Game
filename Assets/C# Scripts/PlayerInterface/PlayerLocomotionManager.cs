@@ -61,7 +61,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         // Clamp movement
     }
 
-    private void HandleGroundedMovement() { 
+    private void HandleGroundedMovement() {
+        if (!player.canMove) {
+            return;
+        }
+
         GetVerticalHorizontalInput();
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
         moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
@@ -79,6 +83,9 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleRotation()
     {
+        if (!player.canRotate){
+            return;
+        }
         targetRotationDirection = Vector3.zero;
         targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
         targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
@@ -95,6 +102,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         transform.rotation = targetRotation;
     }
     public void DodgeAttempt() {
+        if (player.isPerformingAction)
+        {
+            return;
+        }
         // If moving while trying to dodge, roll
         if (movementAmount > 0)
         {
@@ -107,10 +118,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
             Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
             player.transform.rotation = playerRotation;
+            player.playerAnimatorManager.PlayTargetActionAnimation("RollForward", true, true, false, false);
         }
         // If still, perform a backstep
-        else { 
+        else {
             //Backstep
+            player.playerAnimatorManager.PlayTargetActionAnimation("Backstep", true, true, false, false);
         }
     }
 }

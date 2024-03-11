@@ -91,8 +91,12 @@ public class PlayerInputManager : MonoBehaviour
     }
     private void Update()
     {
+        HandleAllInputs();
+    }
+    private void HandleAllInputs() {
         HandleMovementInput();
         HandleCameraMovement();
+        HandleDodgeInput();
     }
 
     private void HandleMovementInput(){
@@ -128,6 +132,7 @@ public class PlayerInputManager : MonoBehaviour
             dodgeInput = false;
             //If UI is open, do nothing
             //Perform a dodge roll
+            player.playerLocomotionManager.DodgeAttempt();
         }
     }
 }
