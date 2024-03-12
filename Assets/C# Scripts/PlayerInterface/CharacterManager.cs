@@ -16,6 +16,8 @@ public class CharacterManager : NetworkBehaviour
     public bool applyRootMotion = false;
     public bool isPerformingAction = false;
 
+    
+
     protected virtual void Awake()
     {
         DontDestroyOnLoad(this);

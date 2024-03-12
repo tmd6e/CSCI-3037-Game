@@ -19,6 +19,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Actions")]
     [SerializeField] bool dodgeInput = false;
+    [SerializeField] bool sprintInput = false;
 
     [Header("Camera Rotation")]
     [SerializeField] Vector2 cameraAxis;
@@ -64,9 +65,14 @@ public class PlayerInputManager : MonoBehaviour
         if (playerControls == null) {
             playerControls = new PlayerControls();
 
+            // Movement actions
             playerControls.PlayerMovement.Movement.performed += i => movementAxis = i.ReadValue<Vector2>(); //Retrieve movement data from 'joystick' and feed into movement axis
             playerControls.PlayerCamera.CameraControls.performed += i => cameraAxis = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+
+            // Sprint action
+            playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+            playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
         }
 
         playerControls.Enable();
@@ -97,6 +103,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleMovementInput();
         HandleCameraMovement();
         HandleDodgeInput();
+        HandleSprinting();
     }
 
     private void HandleMovementInput(){
@@ -119,7 +126,7 @@ public class PlayerInputManager : MonoBehaviour
         if (player == null) {
             return;
         }
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, movementAmount);
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, movementAmount, player.playerNetworkManager.isSprinting.Value);
 
     }
 
@@ -133,6 +140,15 @@ public class PlayerInputManager : MonoBehaviour
             //If UI is open, do nothing
             //Perform a dodge roll
             player.playerLocomotionManager.DodgeAttempt();
+        }
+    }
+    private void HandleSprinting() {
+        if (sprintInput)
+        {
+            player.playerLocomotionManager.Sprint();
+        }
+        else {
+            player.playerNetworkManager.isSprinting.Value = false;
         }
     }
 }

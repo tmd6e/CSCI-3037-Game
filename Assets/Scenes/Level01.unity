@@ -321,6 +321,7 @@ MonoBehaviour:
   verticalInput: 0
   movementAmount: 0
   dodgeInput: 0
+  sprintInput: 0
   cameraAxis: {x: 0, y: 0}
   camHorizontalInput: 0
   camVerticalInput: 0
@@ -441,6 +442,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 833357641305609174, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833357641305609174, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833357641305609174, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833357641305609174, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943676698560169852, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943676698560169852, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217250179278456169, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217250179278456169, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217250179278456169, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6252515265887542998, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -484,6 +521,26 @@ PrefabInstance:
     - target: {fileID: 8418727528320651963, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
       propertyPath: m_Name
       value: Player UI Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033097751068532558, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033097751068532558, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033097751068532558, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185276941504688269, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185276941504688269, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

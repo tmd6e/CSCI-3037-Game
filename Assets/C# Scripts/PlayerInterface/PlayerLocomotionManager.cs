@@ -16,9 +16,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float walkingSpeed = 2;
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float rotationSpeed = 5;
+    [SerializeField] float sprintingSpeed = 8;
+    [SerializeField] float sprintingStaminaCost = 2.0f;
 
     [Header("Dodge")]
     private Vector3 rollDirection;
+    [SerializeField] float dodgeStaminaCost = 25;
 
     protected override void Awake()
     {
@@ -42,7 +45,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             movementAmount = player.characterNetworkManager.vertical.Value;
 
             //If not locked on
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, movementAmount);
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, movementAmount, player.playerNetworkManager.isSprinting.Value);
             //If locked on
         }
     }
@@ -61,8 +64,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         // Clamp movement
     }
 
-    private void HandleGroundedMovement() {
-        if (!player.canMove) {
+    private void HandleGroundedMovement()
+    {
+        if (!player.canMove)
+        {
             return;
         }
 
@@ -72,12 +77,20 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         moveDirection.Normalize();
         moveDirection.y = 0;
 
-        if (PlayerInputManager.instance.movementAmount > 0.5f)
+        if (player.playerNetworkManager.isSprinting.Value)
         {
-            player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+            player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
         }
-        else if (PlayerInputManager.instance.movementAmount <= 0.5f) {
-            player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+        else
+        {
+            if (PlayerInputManager.instance.movementAmount > 0.5f)
+            {
+                player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+            }
+            else if (PlayerInputManager.instance.movementAmount <= 0.5f)
+            {
+                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+            }
         }
     }
 
@@ -101,11 +114,45 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
         transform.rotation = targetRotation;
     }
+
+    public void Sprint() {
+        if (player.isPerformingAction) {
+            player.playerNetworkManager.isSprinting.Value = false;
+        }
+
+        // If stamina is depleted, exit sprint
+        if (player.playerNetworkManager.currentStamina.Value <= 0) {
+            player.playerNetworkManager.isSprinting.Value = false;
+            return;
+        }
+        
+
+        // If moving, sprint
+        if (movementAmount >= 0.5)
+        {
+            player.playerNetworkManager.isSprinting.Value = true;
+        }
+        // If stationary, don't sprint
+        else
+        {
+            player.playerNetworkManager.isSprinting.Value = false;
+        }
+
+        if (player.playerNetworkManager.isSprinting.Value) {
+            player.playerNetworkManager.currentStamina.Value -= sprintingStaminaCost * Time.deltaTime;
+        }
+    }
+
     public void DodgeAttempt() {
         if (player.isPerformingAction)
         {
             return;
         }
+        // Check if sufficient stamina
+        if (player.playerNetworkManager.currentStamina.Value <= 0) {
+            return;
+        }
+
         // If moving while trying to dodge, roll
         if (movementAmount > 0)
         {
@@ -125,5 +172,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             //Backstep
             player.playerAnimatorManager.PlayTargetActionAnimation("Backstep", true, true, false, false);
         }
+
+        player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
     }
 }
