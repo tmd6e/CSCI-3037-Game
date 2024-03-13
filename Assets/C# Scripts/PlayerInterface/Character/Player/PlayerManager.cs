@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
+    [Header("DEBUG")]
+    [SerializeField] bool respawnCharacter = false;
     [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerNetworkManager playerNetworkManager;
@@ -34,6 +36,8 @@ public class PlayerManager : CharacterManager
 
         // Regenerate stamina
         playerStatsManager.RegenerateStamina();
+
+        DebugMenu();
     }
 
     protected override void LateUpdate()
@@ -72,6 +76,44 @@ public class PlayerManager : CharacterManager
             playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStamina(playerNetworkManager.staminaMultiplier.Value);
             playerNetworkManager.currentStamina.Value = (float) (playerStatsManager.CalculateStamina(playerNetworkManager.staminaMultiplier.Value));
             PlayerUIManager.instance.playerUIHUDManager.SetMaxStamina(playerNetworkManager.maxStamina.Value);
+        }
+
+        playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+    }
+
+    public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+    {
+        if (IsOwner)
+        {
+            PlayerUIManager.instance.playerUIPopUpManager.SendYouDiedPopup();
+        }
+
+        // Check for living players, if 0, respawn characters
+
+        return base.ProcessDeathEvent(manuallySelectDeathAnimation);   
+    }
+
+    public override void ReviveCharacter()
+    {
+        base.ReviveCharacter();
+
+        if (IsOwner) {
+            playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+            playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
+            // Restore FP
+
+            // Play VFX and exit death state
+            playerAnimatorManager.PlayTargetActionAnimation("Idle", false, false, true, true);
+
+        }
+    }
+
+    // DEBUG MENU
+    private void DebugMenu() {
+        if (respawnCharacter)
+        {
+            respawnCharacter = false;
+            ReviveCharacter();
         }
     }
 }

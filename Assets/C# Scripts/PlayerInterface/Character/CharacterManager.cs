@@ -13,6 +13,7 @@ public class CharacterManager : NetworkBehaviour
     
     [HideInInspector] public CharacterNetworkManager characterNetworkManager;
     [HideInInspector] public CharacterEffectsManager characterEffectsManager;
+    [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
 
     [Header("Action Flags")]
     public bool canRotate = true;
@@ -30,6 +31,7 @@ public class CharacterManager : NetworkBehaviour
         animator = GetComponent<Animator>();
         characterNetworkManager = GetComponent<CharacterNetworkManager>();
         characterEffectsManager = GetComponent<CharacterEffectsManager>();
+        characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
     }
 
     protected virtual void Update() {
@@ -54,5 +56,28 @@ public class CharacterManager : NetworkBehaviour
 
     protected virtual void LateUpdate() { 
     
+    }
+
+    public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false) {
+        if (IsOwner) {
+            characterNetworkManager.currentHealth.Value = 0;
+            isDead.Value = true;
+
+            // Reset flags
+
+            // If not grounded, play aerial death
+
+            if (!manuallySelectDeathAnimation) {
+                characterAnimatorManager.PlayTargetActionAnimation("Die", true);
+            }
+        }
+
+        // Play SFX
+        yield return new WaitForSeconds(5);
+        // Award players with currency that can buy powerups
+    
+    }
+
+    public virtual void ReviveCharacter() { 
     }
 }

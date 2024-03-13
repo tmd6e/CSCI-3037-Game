@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbf6ebccbbd88b40be7dd040b59e9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physDamage: 25
+  physDamage: 1000
   magicDamage: 5
   fireDamage: 5
   lightningDamage: 5

@@ -38,6 +38,19 @@ public class CharacterNetworkManager : NetworkBehaviour
         character = GetComponent<CharacterManager>();
     }
 
+    public void CheckHP(float oldValue, float newValue) {
+        if (currentHealth.Value <= 0) {
+            StartCoroutine(character.ProcessDeathEvent());
+        }
+
+        // Prevents overhealing
+        if (character.IsOwner) {
+            if (currentHealth.Value > maxHealth.Value) { 
+                currentHealth.Value = maxHealth.Value;
+            }
+        }
+    }
+
     [ServerRpc]
     public void NotifyServerOfActionServerRpc(ulong clientID, string animationID, bool applyRootMotion) {
         // If this instance is the host, play the action for all clients
