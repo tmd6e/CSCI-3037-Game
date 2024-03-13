@@ -74,7 +74,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 432.7125, y: 27.4234}
+  m_SizeDelta: {x: 520.1592, y: 47.0989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4188561143144472104
 MonoBehaviour:
@@ -139,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044937714ba8c3b4b8419cfe4149c6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleBarLengthWithMultipliers: 1
+  widthScaleMultiplier: 0.7
 --- !u!1 &2080380949512391360
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +429,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 432.7125, y: 27.4234}
+  m_SizeDelta: {x: 520.1592, y: 47.0989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7198903118379551249
 MonoBehaviour:
@@ -492,6 +494,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044937714ba8c3b4b8419cfe4149c6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleBarLengthWithMultipliers: 1
+  widthScaleMultiplier: 1
 --- !u!1 &5777709117898182488
 GameObject:
   m_ObjectHideFlags: 0
