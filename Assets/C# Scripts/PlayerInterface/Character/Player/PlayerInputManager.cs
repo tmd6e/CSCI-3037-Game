@@ -38,18 +38,20 @@ public class PlayerInputManager : MonoBehaviour
             Debug.Log("Dupe detected");
             Destroy(gameObject);
         }
-        SceneManager.activeSceneChanged += OnSceneChange;
+        
     }
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
         // Remember to set back to false once the menu is fixed
-        instance.enabled = true;
+        instance.enabled = false;
+        SceneManager.activeSceneChanged += OnSceneChange;
     }
 
     private void OnSceneChange(Scene oldScene, Scene newScene) {
         // If the player is loading into the scene, enable the player's controls
+        
         if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             instance.enabled = true;
