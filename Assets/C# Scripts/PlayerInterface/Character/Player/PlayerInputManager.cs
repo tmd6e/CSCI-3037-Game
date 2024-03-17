@@ -12,7 +12,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] Vector2 movementAxis;
-    
+
     public float horizontalInput;
     public float verticalInput;
     public float movementAmount;
@@ -26,7 +26,10 @@ public class PlayerInputManager : MonoBehaviour
     public float camHorizontalInput;
     public float camVerticalInput;
     [SerializeField] bool lockOnInput;
-    
+    [SerializeField] bool lockOnLeftInput;
+    [SerializeField] bool lockOnRightInput;
+    private Coroutine lockOnCoroutine;
+
 
     private void Awake()
     {
@@ -38,7 +41,7 @@ public class PlayerInputManager : MonoBehaviour
             Debug.Log("Dupe detected");
             Destroy(gameObject);
         }
-        
+
     }
 
     private void Start()
@@ -51,7 +54,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnSceneChange(Scene oldScene, Scene newScene) {
         // If the player is loading into the scene, enable the player's controls
-        
+
         if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             instance.enabled = true;
@@ -75,6 +78,8 @@ public class PlayerInputManager : MonoBehaviour
 
             // Lock on action
             playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
+            playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOnLeftInput = true;
+            playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOnRightInput = true;
 
             // Sprint action
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -87,7 +92,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         SceneManager.activeSceneChanged -= OnSceneChange;
     }
-    
+
     private void OnApplicationFocus(bool focus)
     {
         // Disables inputs on minimization
@@ -110,6 +115,7 @@ public class PlayerInputManager : MonoBehaviour
     }
     private void HandleAllInputs() {
         HandleLockOnInput();
+        HandleLockOnSwitchTargetInput();
         HandleMovementInput();
         HandleCameraMovement();
         HandleDodgeInput();
@@ -117,14 +123,73 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     private void HandleLockOnInput() {
-        if (lockOnInput) { 
+        // Target dead?
+        if (player.playerNetworkManager.isLockedOn.Value) {
+            if (player.playerCombatManager.currentTarget == null)
+            {
+                return;
+            }
+            if (player.playerCombatManager.currentTarget.isDead.Value) {
+                player.playerNetworkManager.isLockedOn.Value = false;
+            }
+
+            // Attempt to find a new target
+            if (lockOnCoroutine != null) { 
+                StopCoroutine(lockOnCoroutine);
+            }
+            lockOnCoroutine = StartCoroutine(PlayerCamera.instance.WaitThenFindNewTarget());
+        }
+        // Are we already locked on?
+        if (lockOnInput && player.playerNetworkManager.isLockedOn.Value) {
             lockOnInput = false;
-            // Are we already locked on?
-            // Target dead?
+            PlayerCamera.instance.ClearLockOnTargets();
+            player.playerNetworkManager.isLockedOn.Value = false;
+            // Disable lock on
+            return;
+        }
+        if (lockOnInput && !player.playerNetworkManager.isLockedOn.Value)
+        {
+            lockOnInput = false;
+            // Enable lock on
+            PlayerCamera.instance.HandleLockOn();
+
+            if (PlayerCamera.instance.nearestLockOnTarget != null) {
+                // Set the target as current target
+                player.playerCombatManager.SetTarget(PlayerCamera.instance.nearestLockOnTarget);
+                player.playerNetworkManager.isLockedOn.Value = true;
+            }
         }
     }
 
-    private void HandleMovementInput(){
+    private void HandleLockOnSwitchTargetInput() {
+        if (lockOnLeftInput) {
+            lockOnLeftInput = false;
+
+            if (player.playerNetworkManager.isLockedOn.Value) {
+                PlayerCamera.instance.HandleLockOn();
+
+                if (PlayerCamera.instance.leftLockOnTarget != null) {
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.leftLockOnTarget);
+                }
+            }
+        }
+        if (lockOnRightInput)
+        {
+            lockOnRightInput = false;
+
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                PlayerCamera.instance.HandleLockOn();
+
+                if (PlayerCamera.instance.rightLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.rightLockOnTarget);
+                }
+            }
+        }
+    }
+
+    private void HandleMovementInput() {
         verticalInput = movementAxis.y;
         horizontalInput = movementAxis.x;
 
@@ -144,8 +209,13 @@ public class PlayerInputManager : MonoBehaviour
         if (player == null) {
             return;
         }
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, movementAmount, player.playerNetworkManager.isSprinting.Value);
-
+        if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+        {
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, movementAmount, player.playerNetworkManager.isSprinting.Value);
+        }
+        else {
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
+        }
     }
 
     private void HandleCameraMovement() {

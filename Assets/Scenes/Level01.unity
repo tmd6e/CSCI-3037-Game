@@ -5254,6 +5254,8 @@ MonoBehaviour:
   camHorizontalInput: 0
   camVerticalInput: 0
   lockOnInput: 0
+  lockOnLeftInput: 0
+  lockOnRightInput: 0
 --- !u!4 &1088224562
 Transform:
   m_ObjectHideFlags: 0

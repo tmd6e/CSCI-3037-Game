@@ -10,7 +10,8 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerNetworkManager playerNetworkManager;
     [HideInInspector] public PlayerStatsManager playerStatsManager;
-    
+    [HideInInspector] public PlayerCombatManager playerCombatManager;
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,6 +22,7 @@ public class PlayerManager : CharacterManager
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerNetworkManager = GetComponent<PlayerNetworkManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
+        playerCombatManager = GetComponent<PlayerCombatManager>();
     }
     protected override void Update()
     {
@@ -79,6 +81,9 @@ public class PlayerManager : CharacterManager
         }
 
         playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+
+        playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
+        playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChange;
     }
 
     public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
@@ -98,6 +103,7 @@ public class PlayerManager : CharacterManager
         base.ReviveCharacter();
 
         if (IsOwner) {
+            isDead.Value = false;
             playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
             playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
             // Restore FP
@@ -114,6 +120,13 @@ public class PlayerManager : CharacterManager
         {
             respawnCharacter = false;
             ReviveCharacter();
+        }
+    }
+
+    public void LoadOtherPlayerCharacterWhenJoiningServer() {
+        if (playerNetworkManager.isLockedOn.Value) {
+            playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+
         }
     }
 }

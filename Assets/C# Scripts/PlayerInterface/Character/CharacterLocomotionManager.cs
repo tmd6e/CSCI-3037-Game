@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CharacterLocomotionManager : MonoBehaviour
 {
+
+    [Header("Flags")]
+    public bool isRolling = false;
+
     protected virtual void Awake() { 
     
     }
