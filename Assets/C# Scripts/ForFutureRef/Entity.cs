@@ -25,6 +25,39 @@ public class Entity : MonoBehaviour
     }
     */
     // Actions
+
+    public void TakeDamage(int damage, bool bypassToughness = false)
+    {
+        if (toughnessMeter && toughness > 0 && !bypassToughness)
+        {
+
+            toughness -= 25; // Adjust this section as needed
+            health -= (int)(damage * 0.1);
+        }
+        else
+        {
+            health -= damage;
+        }
+
+        if (health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            Debug.Log("Pass");
+            //animator.SetTrigger("GotHit");
+        }
+    }
+
+    void Die()
+    {
+        //animator.SetBool("isDead", true);
+        // Can wait for the death animation to finish before destruction if you have the length
+        // Destroy(this.gameObject, animationClip.length);
+        Destroy(this.gameObject); // Immediate destruction
+    }
+
     private void Start()
     {
         
