@@ -66,6 +66,8 @@ public class CharacterManager : NetworkBehaviour
         if (IsOwner) {
             characterNetworkManager.currentHealth.Value = 0;
             isDead.Value = true;
+            canMove = false;
+            canRotate = false;
 
             // Reset flags
 
