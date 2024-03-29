@@ -20,6 +20,7 @@ public class PlayerInputManager : MonoBehaviour
     [Header("Actions")]
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
+    [SerializeField] bool jumpInput = false;
 
     [Header("Camera")]
     [SerializeField] Vector2 cameraAxis;
@@ -75,6 +76,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementAxis = i.ReadValue<Vector2>(); //Retrieve movement data from 'joystick' and feed into movement axis
             playerControls.PlayerCamera.CameraControls.performed += i => cameraAxis = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+            playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
 
             // Lock on action
             playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
@@ -120,6 +122,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleCameraMovement();
         HandleDodgeInput();
         HandleSprinting();
+        HandleJumpInput();
     }
 
     private void HandleLockOnInput() {
@@ -237,6 +240,19 @@ public class PlayerInputManager : MonoBehaviour
         }
         else {
             player.playerNetworkManager.isSprinting.Value = false;
+        }
+    }
+
+    private void HandleJumpInput()
+    {
+        if (jumpInput)
+        {
+            jumpInput = false;
+
+            // If we have a UI window open, simply return without doing anything
+
+            // Attempt to perform jump
+            player.playerLocomotionManager.JumpAttempt();
         }
     }
 }

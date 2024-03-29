@@ -22,8 +22,9 @@ public class CharacterManager : NetworkBehaviour
     public bool canMove = true;
     public bool applyRootMotion = false;
     public bool isPerformingAction = false;
+    public bool isJumping = false;
+    public bool isGrounded = true;
 
-    
 
     protected virtual void Awake()
     {
@@ -39,6 +40,7 @@ public class CharacterManager : NetworkBehaviour
     }
 
     protected virtual void Update() {
+        animator.SetBool("isGrounded", isGrounded);
         if (IsOwner)
         {
             characterNetworkManager.networkPos.Value = transform.position;

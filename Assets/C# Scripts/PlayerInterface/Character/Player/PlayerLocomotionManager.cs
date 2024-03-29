@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerLocomotionManager : CharacterLocomotionManager
 {
     PlayerManager player;
+    PlayerInputManager playerInputManager;
     // Values retrieved from input manager
     [HideInInspector] public float verticalMovement;
     [HideInInspector] public float horizontalMovement;
@@ -18,6 +19,13 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float rotationSpeed = 5;
     [SerializeField] float sprintingSpeed = 8;
     [SerializeField] float sprintingStaminaCost = 2.0f;
+
+    [Header("Jump")]
+    [SerializeField] float jumpStaminaCost = 25;
+    [SerializeField] float jumpHeight = 4;
+    [SerializeField] float jumpForwardSpeed = 5;
+    [SerializeField] float freeFallSpeed = 2;
+    private Vector3 jumpDirection;
 
     [Header("Dodge")]
     private Vector3 rollDirection;
@@ -62,6 +70,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         HandleGroundedMovement();
         //Aerial
         HandleRotation();
+        HandleJumpingMovement();
     }
 
     private void GetVerticalHorizontalInput() {
@@ -98,6 +107,14 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             {
                 player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
             }
+        }
+    }
+
+    private void HandleJumpingMovement()
+    {
+        if (player.isJumping)
+        {
+            player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
         }
     }
 
@@ -225,5 +242,81 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
 
         player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
+    }
+
+    public void ApplyJumpingVelocity()
+    {
+        // Apply an upward velocity depending on forces
+        yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
+    }
+
+    public void JumpAttempt()
+    {
+        Debug.Log("Attempting jump");
+        // If we are perfroming a general action, we do not want to allow a jump (will change when combat is added)
+        if (player.isPerformingAction)
+        {
+            return;
+        }
+        // Check if sufficient stamina
+        // If we are out of stamina, we do not wish to allow a jump
+        if (player.playerNetworkManager.currentStamina.Value <= 0)
+        {
+            return;
+        }
+
+        // If we are already in a jump, we do not want to allow a jump again until the current jump has finished
+        if (player.isJumping)
+        {
+            return;
+        }
+
+        // If we are not grounded, we do not want to allow a jump
+        if (!player.isGrounded)
+        {
+            return;
+        }
+
+        
+        player.playerAnimatorManager.PlayTargetActionAnimation("Jump", false);
+
+        player.isJumping = true;
+
+        player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
+
+        jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
+        jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
+
+        jumpDirection.y = 0;
+
+        //ApplyJumpingVelocity();
+
+        if (jumpDirection != Vector3.zero)
+        {
+
+
+
+            // If we are sprinting, jump direction is at full distance
+            if (player.playerNetworkManager.isSprinting.Value)
+            {
+                jumpDirection *= 1;
+            }
+
+            // If we are running, jump direction is at half distance
+            else if (PlayerInputManager.instance.movementAmount > 0.5)
+            {
+                jumpDirection *= 0.5f;
+            }
+
+            // If we are walking, jump direction is at quarter distance
+            else if (PlayerInputManager.instance.movementAmount <= 0.5)
+            {
+                jumpDirection *= 0.25f;
+            }
+        }
+        else
+        {
+
+        }
     }
 }
