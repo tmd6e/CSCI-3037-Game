@@ -80,29 +80,41 @@ public class Enemy : Entity
     }
 
     //Hit registration
+    //    private void OnTriggerEnter(Collider other)
+    //    {
+    //        if (other.gameObject.layer == 9)
+    //        {
+    //            PlayerHitbox attackerHitbox = other.gameObject.GetComponent<PlayerHitbox>();
+    //
+    //            // If toughness is up, take reduced damage
+    //            if (toughnessMeter && toughness > 0)
+    //            {
+    //                toughness -= attackerHitbox.PlayerReference.toughnessBreak;
+    //                health -= (int)(attackerHitbox.attackPower * 0.1);
+    //            }
+    //            // When toughness is depleted, take double damage
+    //            else if (toughnessMeter && toughness <= 0)
+    //            {
+    //                health -= (int)(attackerHitbox.attackPower * 2);
+    //            }
+    //            else {
+    //                health -= attackerHitbox.attackPower;
+    //            }
+    //        }
+    //    }
+    //
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == 9) // Assuming layer 9 is the player's attack layer
         {
-            PlayerHitbox attackerHitbox = other.gameObject.GetComponent<PlayerHitbox>();
-
-            // If toughness is up, take reduced damage
-            if (toughnessMeter && toughness > 0)
+            PlayerHitbox attackerHitbox = other.GetComponent<PlayerHitbox>();
+            if (attackerHitbox != null)
             {
-                toughness -= attackerHitbox.PlayerReference.toughnessBreak;
-                health -= (int)(attackerHitbox.attackPower * 0.1);
-            }
-            // When toughness is depleted, take double damage
-            else if (toughnessMeter && toughness <= 0)
-            {
-                health -= (int)(attackerHitbox.attackPower * 2);
-            }
-            else {
-                health -= attackerHitbox.attackPower;
+                TakeDamage(attackerHitbox.attackPower);
             }
         }
     }
-
     private IEnumerator ParameterFrameChange(string parameter) {yield return new WaitForSeconds(2.0f);
     }
 }
