@@ -17,6 +17,9 @@ public class CharacterManager : NetworkBehaviour
     [HideInInspector] public CharacterCombatManager characterCombatManager;
     [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
 
+    [Header("Character Group")]
+    public CharacterGroup characterGroup;
+
     [Header("Action Flags")]
     public bool canRotate = true;
     public bool canMove = true;
@@ -60,6 +63,11 @@ public class CharacterManager : NetworkBehaviour
 
     protected virtual void LateUpdate() { 
     
+    }
+
+    protected virtual void FixedUpdate()
+    {
+
     }
 
     public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false) {

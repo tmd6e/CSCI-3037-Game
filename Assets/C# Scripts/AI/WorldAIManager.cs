@@ -8,6 +8,12 @@ public class WorldAIManager : MonoBehaviour
 {
     public static WorldAIManager instance;
 
+    [Header("DEBUG")]
+    [SerializeField] bool despawnCharacters = false;
+    [SerializeField] bool respawnCharacters = false;
+    
+
+
     [Header("Characters")]
     [SerializeField] GameObject[] aiCharacters;
     [SerializeField] List<GameObject> spawnedCharacters;
@@ -41,6 +47,22 @@ public class WorldAIManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+       
+        if (respawnCharacters)
+        {
+            respawnCharacters = false;
+            DespawnAllCharacters();
+            SpawnAllCharacters();
+        }
+        if (despawnCharacters)
+        {
+            despawnCharacters = false;
+            DespawnAllCharacters();
+        }
+    }
+
     private IEnumerator WaitForSceneToLoadThenSpawnCharacters()
     {
         while (!SceneManager.GetActiveScene().isLoaded)
@@ -61,5 +83,24 @@ public class WorldAIManager : MonoBehaviour
             instantiatedCharacter.GetComponent<NetworkObject>().Spawn();
             spawnedCharacters.Add(instantiatedCharacter);
         }
+    }
+
+    private void DespawnAllCharacters()
+    {
+        foreach (var character in spawnedCharacters)
+        {
+            character.GetComponent<NetworkObject>().Despawn();
+        }
+        spawnedCharacters.Clear();
+    }
+
+    private void DisableAllCharacters()
+    {
+        // THIS IS A POTENTIAL OPTIMIZATION : NOT MANDATORY!
+
+        // TO DO DISABLE CHARACTER GAMEOBJECTS, SYNC DISABLED STATUS ON NETWORK
+        // DISABLE GAMEOBJECTS FOR CLIENTS UPON CONNECTING, IF DISABLED STATUS IS TRUE
+        // CAN BE USED TO DISABLE CHARACTERS THAT ARE FAR FROM PLAYERS TO SAVE MEMORY
+        // CHARACTERS CAN BE SPLIT INTO AREAS (AREA_00_, AREA_001_, etc)
     }
 }

@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 8998854627749881893}
   - component: {fileID: 3949151526499012981}
   - component: {fileID: 1314403570825476082}
-  - component: {fileID: 1124730625897890292}
+  - component: {fileID: 4693416249949556507}
   - component: {fileID: 2595678250906026063}
   - component: {fileID: 3600842627058912928}
   - component: {fileID: 359898585583227251}
@@ -248,8 +248,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895084807767759066}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.33369678, z: 0, w: 0.9426805}
+  m_LocalPosition: {x: -5.63678, y: 0, z: 3.9419482}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -432,7 +432,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6991766e89ee76049a06d1b1eae01cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1124730625897890292
+  isDead:
+    m_InternalValue: 0
+  characterController: {fileID: 0}
+  animator: {fileID: 0}
+  characterNetworkManager: {fileID: 0}
+  characterEffectsManager: {fileID: 0}
+  characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterLocomotionManager: {fileID: 0}
+  characterGroup: 1
+  canRotate: 1
+  canMove: 1
+  applyRootMotion: 0
+  isPerformingAction: 0
+  aiCharacterCombatManager: {fileID: 0}
+  currentState: {fileID: 11400000, guid: bdd537cc619c62a459879b0a87c00165, type: 2}
+--- !u!114 &4693416249949556507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -441,11 +457,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 895084807767759066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2777a1f3ecb50d14e8b9d00a99c880ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 2be9c9ec79ad7a048aece7204279d911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   lockOnTransform: {fileID: 8384535974212913795}
+  detectionRadius_: 15
+  minimumDetectionAngle: -35
+  maximumDetectionAngle: 35
 --- !u!114 &2595678250906026063
 MonoBehaviour:
   m_ObjectHideFlags: 0
