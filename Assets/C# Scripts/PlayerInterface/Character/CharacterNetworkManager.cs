@@ -24,7 +24,9 @@ public class CharacterNetworkManager : NetworkBehaviour
     [Header("Flags")]
     public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    
+    public NetworkVariable<bool> isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
     [Header("Stats")]
     public NetworkVariable<float> staminaMultiplier = new NetworkVariable<float>(1.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> healthMultiplier = new NetworkVariable<float>(1.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -65,6 +67,11 @@ public class CharacterNetworkManager : NetworkBehaviour
         if (!isLockedOn) {
             character.characterCombatManager.currentTarget = null;
         }
+    }
+
+    public void OnIsMovingChanged(bool oldStatus, bool newStatus)
+    {
+        character.animator.SetBool("isMoving", isMoving.Value);
     }
 
     [ServerRpc]

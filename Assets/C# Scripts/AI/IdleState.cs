@@ -10,10 +10,7 @@ public class IdleState : AIState
 
         if (aICharacter.characterCombatManager.currentTarget != null)
         {
-            // RETURN TO PURSUE TARGET STATE
-            Debug.Log("WE HAVE A TARGET");
-
-            return this;
+            return SwitchState(aICharacter, aICharacter.pursueTarget);
         }
         else
         {
@@ -25,7 +22,6 @@ public class IdleState : AIState
             return this;
         }
 
-        return this;
     }
 
 }

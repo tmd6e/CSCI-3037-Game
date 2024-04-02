@@ -16,4 +16,15 @@ public class AIState : ScriptableObject
         // IF WE HAVE NOT FOUND THE PLAYER, CONTINUE TO RETURN IDLE STATE
         return this;
     }
+
+    protected virtual AIState SwitchState(AICharacterManager aICharacter, AIState newState)
+    {
+        ResetStateFlags(aICharacter);
+        return newState;
+    }
+
+    protected virtual void ResetStateFlags(AICharacterManager aICharacter)
+    {
+        // RESET ANY STATE FLAGS HERE SO WHEN YOU RETURN TO THE STATE, THEY ARE BLANK ONCE AGAIN        
+    }
 }
