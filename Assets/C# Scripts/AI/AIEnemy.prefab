@@ -268,7 +268,7 @@ Animator:
   m_GameObject: {fileID: 895084807767759066}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f196fc9101d89254f9ad5834eff2adcb, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1fa28a13efb9cbb43bc4d29c24fd3d23, type: 2}
+  m_Controller: {fileID: 9100000, guid: 131369fc2cf0ba34fb3064fef226ca60, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -445,7 +445,7 @@ MonoBehaviour:
   characterGroup: 1
   canRotate: 1
   canMove: 1
-  applyRootMotion: 0
+  applyRootMotion: 1
   isPerformingAction: 0
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
