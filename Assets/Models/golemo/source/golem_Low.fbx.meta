@@ -1,0 +1,189 @@
+fileFormatVersion: 2
+guid: 73d5b3edfdfc1734d9bfe905ef19c967
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body
+    second: {fileID: 2100000, guid: 8f49cfcddb778794391ea7800f150f8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hand
+    second: {fileID: 2100000, guid: 391b23194f38b44438d27a55bb6dd8ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leg
+    second: {fileID: 2100000, guid: 832d2143bea7dc747b4e1f60b2d6e079, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: golem_Low(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hand_cylinder_big_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.005678633, y: 2.2853978, z: -1.4934657}
+      rotation: {x: -0.5008844, y: -4.048204e-17, z: 4.048204e-17, w: 0.8655142}
+      scale: {x: 100, y: 100.00001, z: 100.00001}
+    - name: body_Low
+      parentName: golem_Low(Clone)
+      position: {x: 0.000012223165, y: 2.3772058, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: leg_1_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.4430771, y: 1.7754745, z: -0.6215203}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: chain_1_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.010004175, y: 2.6742194, z: -1.2818}
+      rotation: {x: 0.6618672, y: 0.6978587, z: 0.11398816, w: -0.24886103}
+      scale: {x: 100, y: 100.00001, z: 99.99999}
+    - name: chain_2_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.02865696, y: 1.987791, z: -1.7298061}
+      rotation: {x: -0.579433, y: 0.70432043, z: -0.062711306, w: 0.4052868}
+      scale: {x: 100, y: 99.99999, z: 100}
+    - name: hand_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.005678633, y: 0.87920654, z: -1.9952382}
+      rotation: {x: -0.5106074, y: -3.8769724e-17, z: 3.876972e-17, w: 0.859814}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hand_cylinder_small_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.010004173, y: 2.7588308, z: -1.2231225}
+      rotation: {x: -0.5008844, y: -4.048204e-17, z: 4.048204e-17, w: 0.8655142}
+      scale: {x: 100, y: 100.00001, z: 100.00001}
+    - name: leg_2_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.21589582, y: 1.2086827, z: -0.7875579}
+      rotation: {x: -0.5441344, y: -3.2736447e-17, z: 3.2736447e-17, w: 0.8389981}
+      scale: {x: 100, y: 100, z: 100}
+    - name: leg_3_Low
+      parentName: golem_Low(Clone)
+      position: {x: -0.23467371, y: 0.36960146, z: -0.9656615}
+      rotation: {x: -0.7181477, y: 2.471013e-18, z: -2.4710218e-18, w: 0.6958907}
+      scale: {x: 100, y: 100, z: 100}
+    - name: chain_1_Low.001
+      parentName: golem_Low(Clone)
+      position: {x: -0.005678635, y: 2.404477, z: -1.425039}
+      rotation: {x: -0.40824503, y: 0.6416211, z: -0.29719096, w: 0.57735246}
+      scale: {x: 102.864044, y: 102.864044, z: 102.86405}
+    - name: chain_1_Low.002
+      parentName: golem_Low(Clone)
+      position: {x: -0.005678656, y: 2.1945627, z: -1.545662}
+      rotation: {x: 0.48727974, y: 0.16719854, z: 0.68705523, w: 0.5124044}
+      scale: {x: 111.8586, y: 111.858604, z: 111.85862}
+    - name: chain_1_Low.003
+      parentName: golem_Low(Clone)
+      position: {x: -0.034600634, y: 1.7508312, z: -1.88975}
+      rotation: {x: -0.1605087, y: 0.48227337, z: -0.51711935, w: 0.68864864}
+      scale: {x: 124.057556, y: 124.057556, z: 124.05759}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
