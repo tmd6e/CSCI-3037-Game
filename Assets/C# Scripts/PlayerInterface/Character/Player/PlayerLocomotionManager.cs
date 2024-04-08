@@ -82,6 +82,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     private void HandleGroundedMovement()
     {
+        if (player.isDead.Value)
+        {
+            return;
+        }
         if (!player.canMove)
         {
             return;
@@ -211,7 +215,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     }
 
     public void DodgeAttempt() {
-        if (player.isPerformingAction)
+        if (player.isPerformingAction || player.isDead.Value)
         {
             return;
         }

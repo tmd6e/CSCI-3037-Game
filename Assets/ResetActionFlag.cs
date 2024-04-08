@@ -10,13 +10,15 @@ public class ResetActionFlag : StateMachineBehaviour
     //When the animation finishes, refresh the flags for the next animation
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (character == null) { 
+        if (character == null) {
             character = animator.GetComponent<CharacterManager>();
         }
         // Called when action ends
         character.isPerformingAction = false;
-        character.canMove = true;
-        character.canRotate = true;
+        if (!character.isDead.Value) {
+            character.canMove = true;
+            character.canRotate = true;
+        }
         character.applyRootMotion = false;
         character.isJumping = false;
         character.characterLocomotionManager.isRolling = false;

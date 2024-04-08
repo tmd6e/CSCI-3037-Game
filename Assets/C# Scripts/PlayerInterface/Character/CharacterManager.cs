@@ -17,6 +17,9 @@ public class CharacterManager : NetworkBehaviour
     [HideInInspector] public CharacterCombatManager characterCombatManager;
     [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
 
+    [Header("Character Group")]
+    public CharacterGroup characterGroup;
+
     [Header("Action Flags")]
     public bool canRotate = true;
     public bool canMove = true;
@@ -64,10 +67,31 @@ public class CharacterManager : NetworkBehaviour
     
     }
 
+    protected virtual void FixedUpdate()
+    {
+
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
+    }
+
     public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false) {
         if (IsOwner) {
             characterNetworkManager.currentHealth.Value = 0;
             isDead.Value = true;
+            canMove = false;
+            canRotate = false;
 
             // Reset flags
 
