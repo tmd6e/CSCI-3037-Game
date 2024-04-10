@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77a3ff9e8f7485a4aaa4fffd6ac1caec, type: 3}
-  m_Name: GolemStomp
+  m_Name: GolemShockwave
   m_EditorClassIdentifier: 
-  attackAnimation: GolemStomp
+  attackAnimation: GolemShockwave
   comboAction: {fileID: 0}
-  attackWeight: 50
+  attackWeight: 25
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35
   maximumAttackAngle: 35
-  minimumAttackDistance: 0
-  maximumAttackDistance: 2
+  minimumAttackDistance: 4
+  maximumAttackDistance: 10

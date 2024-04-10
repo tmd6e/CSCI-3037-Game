@@ -14,6 +14,7 @@ public class IdleState : AIState
 
         if (aICharacter.characterCombatManager.currentTarget != null && aICharacter.characterCombatManager.currentTarget.isDead.Value)
         {
+            aICharacter.characterCombatManager.currentTarget = null;
             aICharacter.aiCharacterCombatManager.FindATargetViaLineOfSight(aICharacter);
             return this;
         }

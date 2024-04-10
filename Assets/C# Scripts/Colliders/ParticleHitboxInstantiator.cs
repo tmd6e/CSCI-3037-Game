@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
 using static UnityEngine.ParticleSystem;
 
 public class ParticleHitboxInstantiator : MonoBehaviour
@@ -39,7 +38,7 @@ public class ParticleHitboxInstantiator : MonoBehaviour
         //}
 
         // Spawn / Destroy hitboxes to match live particles
-        RegulateParticleMapping();
+        StartCoroutine(RegulateParticleMapping());
         // Once there are hitboxes, move them with the particles
         MoveMappedParticles();
     }
@@ -53,22 +52,30 @@ public class ParticleHitboxInstantiator : MonoBehaviour
         yield break;
     }
 
-    void RegulateParticleMapping()
+    IEnumerator RegulateParticleMapping()
     {
         numParticlesAlive = attackParticleSystem.GetParticles(particles);
+        GameObject hitboxReference = null;
         // If particle numbers do not match hitbox numbers, correct this
         while (numParticlesAlive > spawnedHitboxes.Count)
         {
+            hitboxReference = Instantiate(hitbox, attackParticleSystem.transform.position,
+            Quaternion.identity);
             spawnedHitboxes.Add(
-            Instantiate(hitbox, attackParticleSystem.transform.position, 
-            Quaternion.identity)
+            hitboxReference
             );
+            Debug.Log("Spawning particles");
         }
+
+        yield return new WaitForSeconds(attackParticleSystem.main.startLifetimeMultiplier);
+
         while (numParticlesAlive < spawnedHitboxes.Count)
         {
             Destroy(spawnedHitboxes[spawnedHitboxes.Count-1]);
             spawnedHitboxes.RemoveAt(spawnedHitboxes.Count - 1);
         }
+
+        yield return null;
     }
 
     void MoveMappedParticles()
@@ -82,8 +89,11 @@ public class ParticleHitboxInstantiator : MonoBehaviour
         for (int i = 0; i < numParticlesAlive; i++)
         {
             ParticleSystem.Particle particle = particles[i];
-            spawnedHitboxes[i].transform.position = particle.position
-                     + attackParticleSystem.transform.position;
+
+            if(particle.remainingLifetime > 0)
+            {
+                spawnedHitboxes[i].transform.position = attackParticleSystem.transform.localPosition + particle.position;
+            }
         }
     }
 }

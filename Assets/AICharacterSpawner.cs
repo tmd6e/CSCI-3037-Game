@@ -22,7 +22,7 @@ public class AICharacterSpawner : MonoBehaviour
 
     public void AttemptToSpawnCharacter() {
         if (characterGameObject != null) {
-            instantiatedCharacter = Instantiate(characterGameObject);
+            instantiatedCharacter = Instantiate(characterGameObject, transform.position, transform.rotation);
             instantiatedCharacter.transform.position = transform.position;
             instantiatedCharacter.transform.rotation = transform.rotation;
             instantiatedCharacter.GetComponent<NetworkObject>().Spawn();
