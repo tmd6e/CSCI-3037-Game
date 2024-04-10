@@ -5,12 +5,17 @@ using UnityEngine;
 public class WorldSoundFXManager : MonoBehaviour
 {
     public static WorldSoundFXManager instance;
+    public AudioSource globalAudioSource;
 
     [Header("Sound Effects")]
+    public AudioClip music;
     public AudioClip rollSFX;
 
     private void Awake()
     {
+        globalAudioSource = GetComponent<AudioSource>();
+        globalAudioSource.clip = music;
+        globalAudioSource.Play();
         if (instance == null) { 
             instance = this;
         }

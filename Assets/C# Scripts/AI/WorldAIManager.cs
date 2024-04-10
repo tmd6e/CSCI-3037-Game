@@ -8,14 +8,10 @@ public class WorldAIManager : MonoBehaviour
 {
     public static WorldAIManager instance;
 
-    [Header("DEBUG")]
-    [SerializeField] bool despawnCharacters = false;
-    [SerializeField] bool respawnCharacters = false;
-    
 
 
     [Header("Characters")]
-    [SerializeField] GameObject[] aiCharacters;
+    public List<AICharacterSpawner> aICharacterSpawners;
     [SerializeField] List<GameObject> spawnedCharacters;
 
     private void Awake()
@@ -31,58 +27,13 @@ public class WorldAIManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void SpawnCharacter(AICharacterSpawner aiCharacterSpawner)
     {
-        DontDestroyOnLoad(gameObject);
-        Debug.Log("Started!");
-        if (NetworkManager.Singleton.IsServer)
-        {
-            Debug.Log("Server");
-            StartCoroutine(WaitForSceneToLoadThenSpawnCharacters());
+        if (NetworkManager.Singleton.IsServer) {
+            aICharacterSpawners.Add(aiCharacterSpawner);
+            aiCharacterSpawner.AttemptToSpawnCharacter();
         }
-        else
-        {
-            Debug.Log("Not Server");
-            //StartCoroutine(WaitForSceneToLoadThenSpawnCharacters());
-        }
-    }
-
-    private void Update()
-    {
-       
-        if (respawnCharacters)
-        {
-            respawnCharacters = false;
-            DespawnAllCharacters();
-            SpawnAllCharacters();
-        }
-        if (despawnCharacters)
-        {
-            despawnCharacters = false;
-            DespawnAllCharacters();
-        }
-    }
-
-    private IEnumerator WaitForSceneToLoadThenSpawnCharacters()
-    {
-        while (!SceneManager.GetActiveScene().isLoaded)
-        {
-            yield return null;
-        }
-
-        SpawnAllCharacters();
-    }
-
-    private void SpawnAllCharacters()
-    {
-        Debug.Log("Spawned!");
-        foreach (var character in aiCharacters)
-        {
-            Debug.Log("Character!");
-            GameObject instantiatedCharacter = Instantiate(character);
-            instantiatedCharacter.GetComponent<NetworkObject>().Spawn();
-            spawnedCharacters.Add(instantiatedCharacter);
-        }
+        
     }
 
     private void DespawnAllCharacters()

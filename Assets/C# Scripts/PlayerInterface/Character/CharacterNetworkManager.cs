@@ -6,6 +6,10 @@ using Unity.Netcode;
 public class CharacterNetworkManager : NetworkBehaviour
 {
     CharacterManager character;
+
+    [Header("Active")]
+    public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     [Header("Transform")]
     public NetworkVariable<Vector3> networkPos = new NetworkVariable<Vector3>(Vector3.zero,NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<Quaternion> networkRot = new NetworkVariable<Quaternion>(Quaternion.identity, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -25,22 +29,33 @@ public class CharacterNetworkManager : NetworkBehaviour
     public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
+    public NetworkVariable<bool> isInvulnerable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     [Header("Stats")]
     public NetworkVariable<float> staminaMultiplier = new NetworkVariable<float>(1.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> healthMultiplier = new NetworkVariable<float>(1.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     
+
     [Header("Resources")]
     public NetworkVariable<float> currentHealth = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<int> maxHealth = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> currentStamina = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<int> maxStamina = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
+    
+    [Header("AI Exclusive")]
+    public NetworkVariable<float> currentToughness = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> maxToughness = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> canBeBroken = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
+    }
+
+    public void CheckToughness(float oldValue, float newValue) {
+        if (currentToughness.Value <= 0 && !character.isBroken.Value) { 
+            StartCoroutine(character.ProcessBreakEvent());
+        }
     }
 
     public void CheckHP(float oldValue, float newValue) {
@@ -74,6 +89,10 @@ public class CharacterNetworkManager : NetworkBehaviour
         character.animator.SetBool("isMoving", isMoving.Value);
     }
 
+    public virtual void OnIsActiveChanged(bool oldValue, bool newValue)
+    {
+        gameObject.SetActive(isActive.Value);
+    }
     [ServerRpc]
     public void NotifyServerOfActionServerRpc(ulong clientID, string animationID, bool applyRootMotion) {
         // If this instance is the host, play the action for all clients

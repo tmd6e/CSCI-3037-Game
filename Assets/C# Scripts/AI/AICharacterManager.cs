@@ -10,6 +10,10 @@ public class AICharacterManager : CharacterManager
     [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
     [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
 
+    [Header("Debug Menu")]
+    public bool respawnCharacter;
+
+
     [Header("Navmesh Agent")]
     public NavMeshAgent navMeshAgent;
 
@@ -19,24 +23,35 @@ public class AICharacterManager : CharacterManager
     [Header("States")]
     public IdleState idle;
     public PursueTargetState pursueTarget;
-    // Combat Stance
-    // Attack State
+    public CombatStanceState combatStance;
+    public AttackState attack;
+    public DeadState dead;
+    public ToughnessBrokenState toughnessBrokenState;
 
 
     protected override void Awake()
     {
         base.Awake();
-        
+
         aiCharacterCombatManager = GetComponent<AICharacterCombatManager>();
         aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
         aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
-        navMeshAgent= GetComponentInChildren<NavMeshAgent>();
+        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
 
         // Make a copy so the original is not modified
         idle = Instantiate(idle);
         pursueTarget = Instantiate(pursueTarget);
 
         currentState = idle;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        aiCharacterCombatManager.HandleActionRecovery(this);
+
+        DebugMenu();
     }
     protected override void FixedUpdate()
     {
@@ -45,8 +60,19 @@ public class AICharacterManager : CharacterManager
         ProcessStateMachine();
     }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHP;
+        aiCharacterNetworkManager.currentToughness.OnValueChanged += aiCharacterNetworkManager.CheckToughness;
+
+        aiCharacterNetworkManager.isLockedOn.OnValueChanged += aiCharacterNetworkManager.OnIsLockedOnChanged;
+        aiCharacterNetworkManager.currentTargetNetworkObjectID.OnValueChanged += aiCharacterNetworkManager.OnLockOnTargetIDChange;
+    }
     private void ProcessStateMachine()
     {
+        
         //Debug.Log("STATE MACHINE");
         //AIState nextState = null;
         //if (currentState != null)
@@ -54,7 +80,6 @@ public class AICharacterManager : CharacterManager
         //    nextState = currentState.Tick(this);
         //}
         AIState nextState = currentState?.Tick(this);
-
         if (nextState != null)
         {
             currentState = nextState;
@@ -62,6 +87,12 @@ public class AICharacterManager : CharacterManager
 
         navMeshAgent.transform.localPosition = Vector3.zero;
         navMeshAgent.transform.localRotation = Quaternion.identity;
+
+        if (aiCharacterCombatManager.currentTarget != null && !aiCharacterCombatManager.currentTarget.isDead.Value) {
+            aiCharacterCombatManager.targetsDirection = aiCharacterCombatManager.currentTarget.transform.position - transform.position;
+            //aiCharacterCombatManager.viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, aiCharacterCombatManager.targetsDirection);
+            aiCharacterCombatManager.distanceFromTarget = Vector3.Distance(transform.position, aiCharacterCombatManager.currentTarget.transform.position);
+        }
 
         if (navMeshAgent.enabled)
         {
@@ -80,6 +111,52 @@ public class AICharacterManager : CharacterManager
         else
         {
             aiCharacterNetworkManager.isMoving.Value = false;
+        }
+    }
+
+    // Provoked if attacked
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 0 || other == null) {
+            return;
+        }
+        Debug.Log("Calling provocation");
+        DamageCollider attacker = other.GetComponent<DamageCollider>();
+
+        if (attacker != null) {
+            Debug.Log("Detected hitbox");
+            CharacterManager possibleTarget = attacker.gameObject.GetComponentInParent<CharacterManager>();
+            if (possibleTarget != null && possibleTarget.gameObject.layer != gameObject.layer)
+            {
+                aiCharacterCombatManager.currentTarget = possibleTarget;
+            }
+            else {
+                Debug.Log("Detected hazard");
+            }
+        }
+        
+    }
+
+    private void DebugMenu()
+    {
+        if (respawnCharacter)
+        {
+            respawnCharacter = false;
+            ReviveCharacter();
+        }
+    }
+
+    public override void ReviveCharacter()
+    {
+        base.ReviveCharacter();
+
+        if (IsOwner)
+        {
+            isDead.Value = false;
+            aiCharacterNetworkManager.currentHealth.Value = aiCharacterNetworkManager.maxHealth.Value;
+            // Play VFX and exit death state
+            characterAnimatorManager.PlayTargetActionAnimation("Idle", false, false, true, true);
+
         }
     }
 }

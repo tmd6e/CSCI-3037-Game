@@ -497,6 +497,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5646689319919443913, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.705078
+      objectReference: {fileID: 0}
     - target: {fileID: 6252515265887542998, guid: b9cfdb78c2de5f64fa57cfb5df7c0a88, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1004,6 +1008,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 42468519477967070, guid: d1b45e555faad9e44a66e8ae3892f636, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2091128728337944540, guid: d1b45e555faad9e44a66e8ae3892f636, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1043,6 +1051,14 @@ PrefabInstance:
     - target: {fileID: 2091128728337944540, guid: d1b45e555faad9e44a66e8ae3892f636, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562053536871766637, guid: d1b45e555faad9e44a66e8ae3892f636, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157163836908935370, guid: d1b45e555faad9e44a66e8ae3892f636, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1546,7 +1562,7 @@ GameObject:
   - component: {fileID: 2014761803}
   - component: {fileID: 2014761802}
   - component: {fileID: 2014761801}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1746,7 +1762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3821030870221923970, guid: 1a7a0c04ce56b4a49b70817ea3a58a06, type: 3}
       propertyPath: characterLayers.m_Bits
-      value: 64
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 3821030870221923970, guid: 1a7a0c04ce56b4a49b70817ea3a58a06, type: 3}
       propertyPath: environmentLayers.m_Bits

@@ -175,6 +175,11 @@ public class PlayerCamera : MonoBehaviour
                 if (lockOnTarget.transform.root == player.transform.root) {
                     continue;
                 }
+                // Do not lock on to ally
+                if (lockOnTarget.gameObject.layer == gameObject.layer)
+                {
+                    continue;
+                }
                 // Do not lock beyond maximum range
                 if (distanceFromTarget > lockOnRadius) {
                     continue;

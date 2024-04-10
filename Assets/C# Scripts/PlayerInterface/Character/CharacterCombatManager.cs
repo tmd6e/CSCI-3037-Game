@@ -20,7 +20,7 @@ public class CharacterCombatManager : NetworkBehaviour
     public virtual void SetTarget(CharacterManager newTarget)
     {
         if (character.IsOwner) {
-            if (newTarget != null)
+            if (newTarget != null && !newTarget.isDead.Value)
             {
                 currentTarget = newTarget;
                 // Tell network there is a new target and identify them
@@ -29,6 +29,21 @@ public class CharacterCombatManager : NetworkBehaviour
             else { 
                 currentTarget = null;
             }
+        }
+    }
+
+    public void EnableIsInvulnerable() {
+        if (character.IsOwner)
+        {
+            character.characterNetworkManager.isInvulnerable.Value = true;
+        
+        }
+    }
+    public void DisableIsInvulnerable()
+    {
+        if (character.IsOwner)
+        {
+            character.characterNetworkManager.isInvulnerable.Value = false;
         }
     }
 }

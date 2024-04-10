@@ -7,7 +7,8 @@ public class CharacterManager : NetworkBehaviour
 {
     [Header("Status")]
     public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    
+    public NetworkVariable<bool> isBroken = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     [HideInInspector] public CharacterController characterController;
     [HideInInspector] public Animator animator;
     
@@ -76,7 +77,11 @@ public class CharacterManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        animator.SetBool("isMoving", characterNetworkManager.isMoving.Value);
+        characterNetworkManager.OnIsActiveChanged(false, characterNetworkManager.isActive.Value);
+        
         characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
+        characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
     }
 
     public override void OnNetworkDespawn()
@@ -89,11 +94,12 @@ public class CharacterManager : NetworkBehaviour
     public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false) {
         if (IsOwner) {
             characterNetworkManager.currentHealth.Value = 0;
+            // Reset flags
             isDead.Value = true;
             canMove = false;
             canRotate = false;
 
-            // Reset flags
+            
 
             // If not grounded, play aerial death
 
@@ -104,8 +110,24 @@ public class CharacterManager : NetworkBehaviour
 
         // Play SFX
         yield return new WaitForSeconds(5);
-        // Award players with currency that can buy powerups
+        // Award players powerups
     
+    }
+    public virtual IEnumerator ProcessBreakEvent()
+    {
+        if (IsOwner)
+        {
+            characterNetworkManager.currentToughness.Value = 0;
+
+            // Reset flags
+            isBroken.Value = true;
+            canMove = false;
+            canRotate = false;
+
+            characterAnimatorManager.PlayTargetActionAnimation("ToughnessBrokenEnter", true);
+        }
+
+        yield return new WaitForSeconds(5);
     }
 
     public virtual void ReviveCharacter() { 

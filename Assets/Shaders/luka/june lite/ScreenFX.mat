@@ -151,7 +151,7 @@ Material:
     - _LiteOverlaySizeX: 1
     - _LiteOverlaySizeY: 1
     - _LiteOverlayTransparency: 0
-    - _LiteRenderingFalloffEnd: 250
+    - _LiteRenderingFalloffEnd: 300
     - _LiteRenderingFalloffStart: 0
     - _LiteRenderingOOB: 1
     - _LiteRenderingPower: 1

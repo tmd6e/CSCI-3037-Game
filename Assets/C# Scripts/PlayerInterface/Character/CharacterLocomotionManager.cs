@@ -35,6 +35,7 @@ public class CharacterLocomotionManager : MonoBehaviour
                 inAirTimer = 0;
                 fallingVelocityHasBeenSet = false;
                 yVelocity.y = groundedYVelocity;
+                character.animator.SetFloat("InAirTimer", inAirTimer);
             }
         }
         else
@@ -63,5 +64,13 @@ public class CharacterLocomotionManager : MonoBehaviour
     protected void OnDrawGizmosSelected()
     {
         Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+    }
+
+    public void EnableCanRotate() {
+        character.canRotate = true;
+    }
+    public void DisableCanRotate()
+    {
+        character.canRotate = false;
     }
 }

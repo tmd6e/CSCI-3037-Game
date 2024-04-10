@@ -75,13 +75,25 @@ public class TakeDamageEffect : InstantCharacterEffect
         // Add damage types together for final damage
         finalDamage = Mathf.RoundToInt(physDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
 
+        // Consider if the character has toughness
+        if (character.characterNetworkManager.canBeBroken.Value) {
+            if (character.characterNetworkManager.currentToughness.Value <= 0) {
+                finalDamage *= 2;
+            }
+            else {
+                finalDamage /= 2;
+            }
+        }
+
         if (finalDamage <= 0) {
             finalDamage = 1;
         }
 
         character.characterNetworkManager.currentHealth.Value -= finalDamage;
-
-        // Calculate toughness damage to determine vulnerability
+        if (character.characterNetworkManager.canBeBroken.Value)
+        {
+            character.characterNetworkManager.currentToughness.Value -= toughnessDamage;
+        }
     }
 
 }

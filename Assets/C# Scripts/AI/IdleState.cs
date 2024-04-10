@@ -7,8 +7,25 @@ public class IdleState : AIState
 {
     public override AIState Tick(AICharacterManager aICharacter)
     {
+        if (aICharacter.isDead.Value)
+        {
+            return SwitchState(aICharacter, aICharacter.dead);
+        }
 
-        if (aICharacter.characterCombatManager.currentTarget != null)
+        if (aICharacter.characterCombatManager.currentTarget != null && aICharacter.characterCombatManager.currentTarget.isDead.Value)
+        {
+            aICharacter.aiCharacterCombatManager.FindATargetViaLineOfSight(aICharacter);
+            return this;
+        }
+
+        if (aICharacter.aiCharacterNetworkManager.currentToughness.Value <= 0 && aICharacter.aiCharacterNetworkManager.canBeBroken.Value)
+        {
+            return SwitchState(aICharacter, aICharacter.toughnessBrokenState);
+        }
+
+        
+
+        if (aICharacter.characterCombatManager.currentTarget != null && !aICharacter.characterCombatManager.currentTarget.isDead.Value)
         {
             return SwitchState(aICharacter, aICharacter.pursueTarget);
         }
