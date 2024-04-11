@@ -36,4 +36,10 @@ public class PlayerCombatManager : CharacterCombatManager
             // Enable off hand combo
         }
     }
+
+    public void DisableCanDoCombo() 
+    {
+        canComboWithMainHandWeapon = false;
+        // canComboWithOffHandWeapon = false;
+    }
 }
