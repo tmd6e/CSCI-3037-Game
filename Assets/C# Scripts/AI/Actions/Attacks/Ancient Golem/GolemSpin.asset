@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimation: GolemSpin
   comboAction: {fileID: 0}
-  attackWeight: 25
+  attackWeight: 10
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35
   maximumAttackAngle: 35

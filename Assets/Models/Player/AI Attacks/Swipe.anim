@@ -55468,7 +55468,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Armature/Hips/Spine/Chest/Right shoulder/Right arm/Right elbow/Right wrist/StrongDamageCollider
+    path: mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/StrongDamageCollider
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -55526,7 +55526,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 589481441
+      path: 538310235
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -112132,7 +112132,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Armature/Hips/Spine/Chest/Right shoulder/Right arm/Right elbow/Right wrist/StrongDamageCollider
+    path: mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/StrongDamageCollider
     classID: 1
     script: {fileID: 0}
     flags: 0

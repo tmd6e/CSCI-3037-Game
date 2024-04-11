@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AICharacterCombatManager : CharacterCombatManager
 {
+    [Header("Boss/Elite Enemy Exclusive")]
+    public bool phase2Triggered = false;
 
     [Header("Action Recovery Timer")]
     public float actionRecoveryTimer = 0;

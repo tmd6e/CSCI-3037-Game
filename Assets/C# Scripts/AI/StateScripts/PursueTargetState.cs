@@ -27,7 +27,7 @@ public class PursueTargetState : AIState
         // CHECK IF OUR TARGET IS NULL, IF SO RETRUN TO IDLE
         if (aICharacter.aiCharacterCombatManager.currentTarget == null)
         {
-            return this;
+            return SwitchState(aICharacter, aICharacter.idle);
         }
         if (aICharacter.aiCharacterCombatManager.currentTarget.isDead.Value)
         {

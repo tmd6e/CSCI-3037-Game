@@ -12,7 +12,7 @@ public class WorldAIManager : MonoBehaviour
 
     [Header("Characters")]
     public List<AICharacterSpawner> aICharacterSpawners;
-    [SerializeField] List<GameObject> spawnedCharacters;
+    public List<GameObject> spawnedCharacters;
 
     private void Awake()
     {
@@ -36,13 +36,27 @@ public class WorldAIManager : MonoBehaviour
         
     }
 
-    private void DespawnAllCharacters()
+    public void DespawnAllCharacters()
     {
+        Debug.Log("Despawning all characters");
         foreach (var character in spawnedCharacters)
         {
             character.GetComponent<NetworkObject>().Despawn();
+            Destroy(character.gameObject);
         }
         spawnedCharacters.Clear();
+    }
+    public void ResetAllCharacters()
+    {
+        DespawnAllCharacters();
+        if (NetworkManager.Singleton.IsServer)
+        {
+            foreach (var spawner in aICharacterSpawners)
+            {
+                spawner.ResetCharacter();
+            }
+        }
+        
     }
 
     private void DisableAllCharacters()

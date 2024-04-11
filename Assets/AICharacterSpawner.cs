@@ -20,12 +20,19 @@ public class AICharacterSpawner : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void ResetCharacter() {
+        gameObject.SetActive(true);
+        AttemptToSpawnCharacter();
+        gameObject.SetActive(false);
+    }
+
     public void AttemptToSpawnCharacter() {
         if (characterGameObject != null) {
             instantiatedCharacter = Instantiate(characterGameObject, transform.position, transform.rotation);
             instantiatedCharacter.transform.position = transform.position;
             instantiatedCharacter.transform.rotation = transform.rotation;
             instantiatedCharacter.GetComponent<NetworkObject>().Spawn();
+            WorldAIManager.instance.spawnedCharacters.Add(instantiatedCharacter);
         }
     }
 }

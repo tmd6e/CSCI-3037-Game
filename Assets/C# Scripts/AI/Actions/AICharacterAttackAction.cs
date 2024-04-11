@@ -7,6 +7,7 @@ public class AICharacterAttackAction : ScriptableObject
 {
     [Header("Attack")]
     [SerializeField] private string attackAnimation;
+    public bool phaseRequired = false;
     [Header("Combo Action")]
     public AICharacterAttackAction comboAction;
 

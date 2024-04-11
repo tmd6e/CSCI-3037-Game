@@ -6,6 +6,7 @@ public class WorldSoundFXManager : MonoBehaviour
 {
     public static WorldSoundFXManager instance;
     public AudioSource globalAudioSource;
+    public AudioClip overworldMusic;
 
     [Header("Sound Effects")]
     public AudioClip music;
@@ -13,11 +14,12 @@ public class WorldSoundFXManager : MonoBehaviour
 
     private void Awake()
     {
-        globalAudioSource = GetComponent<AudioSource>();
-        globalAudioSource.clip = music;
-        globalAudioSource.Play();
+        
         if (instance == null) { 
             instance = this;
+            globalAudioSource = GetComponent<AudioSource>();
+            globalAudioSource.clip = music;
+            globalAudioSource.Play();
         }
         else{
             Destroy(gameObject);

@@ -5,17 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "A.I/States/Combat Stance")]
 public class CombatStanceState : AIState
 {
-    // Select an attack
-    // Process combat logic while awaiting attack
-    // Switch to pursuit if out of range
-    // If target is not present, switch to idle
-
     [Header("Attacks")]
     public List<AICharacterAttackAction> aICharacterAttacks; // All attacks in moveset
     protected List<AICharacterAttackAction> potentialAttacks; // All possible attacks
     private AICharacterAttackAction chosenAttack;
     private AICharacterAttackAction previousAttack;
     protected bool hasAttack = false;
+    protected bool phaseRequirementMet = false;
 
     [Header("Combo")]
     [SerializeField] protected bool canPerformCombo = false;
@@ -27,6 +23,9 @@ public class CombatStanceState : AIState
 
     public override AIState Tick(AICharacterManager aiCharacter)
     {
+        // Check if phase has been changed
+        phaseRequirementMet = aiCharacter.aiCharacterCombatManager.phase2Triggered;
+
         if (aiCharacter.isDead.Value)
         {
             return SwitchState(aiCharacter, aiCharacter.dead);
@@ -99,6 +98,12 @@ public class CombatStanceState : AIState
             }
             if (potentialAttack.maximumAttackDistance < aiCharacter.aiCharacterCombatManager.distanceFromTarget)
             {
+                continue;
+            }
+
+            // Verify phase requirement (skip this attack option if there is a phase required and
+            // the phase requirement is not met
+            if (potentialAttack.phaseRequired && !phaseRequirementMet) {
                 continue;
             }
 

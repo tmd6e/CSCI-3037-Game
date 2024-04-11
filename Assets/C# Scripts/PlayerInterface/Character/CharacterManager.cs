@@ -108,10 +108,12 @@ public class CharacterManager : NetworkBehaviour
             }
         }
 
-        // Play SFX
-        yield return new WaitForSeconds(5);
         // Award players powerups
-    
+        yield return new WaitForSeconds(3);
+        
+
+        // Despawn the body
+        Destroy(gameObject);
     }
     public virtual IEnumerator ProcessBreakEvent()
     {

@@ -91,11 +91,30 @@ public class PlayerManager : CharacterManager
         if (IsOwner)
         {
             PlayerUIManager.instance.playerUIPopUpManager.SendYouDiedPopup();
+            characterNetworkManager.currentHealth.Value = 0;
+            // Reset flags
+            isDead.Value = true;
+            canMove = false;
+            canRotate = false;
+
+
+
+            // If not grounded, play aerial death
+
+            if (!manuallySelectDeathAnimation)
+            {
+                characterAnimatorManager.PlayTargetActionAnimation("Die", true);
+            }
         }
 
-        // Check for living players, if 0, respawn characters
+        // Play SFX
+        yield return new WaitForSeconds(3);
 
-        return base.ProcessDeathEvent(manuallySelectDeathAnimation);   
+        WorldAIManager.instance.ResetAllCharacters();
+
+        yield return new WaitForSeconds(1);
+
+        
     }
 
     public override void ReviveCharacter()

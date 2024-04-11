@@ -32671,7 +32671,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Armature/Hips/Spine/Chest/Left shoulder/Left arm/Left elbow/Left wrist/DamageCollider
+    path: mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:LeftShoulder/mixamorig:LeftArm/mixamorig:LeftForeArm/mixamorig:LeftHand/DamageCollider
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -32728,7 +32728,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Armature/Hips/Spine/Chest/Right shoulder/Right arm/Right elbow/Right wrist/DamageCollider
+    path: mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/DamageCollider
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -32777,7 +32777,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1245767620
+      path: 667971791
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -32786,7 +32786,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 789081752
+      path: 3151100428
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -66604,7 +66604,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Armature/Hips/Spine/Chest/Left shoulder/Left arm/Left elbow/Left wrist/DamageCollider
+    path: mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:LeftShoulder/mixamorig:LeftArm/mixamorig:LeftForeArm/mixamorig:LeftHand/DamageCollider
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -66661,7 +66661,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Armature/Hips/Spine/Chest/Right shoulder/Right arm/Right elbow/Right wrist/DamageCollider
+    path: mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/DamageCollider
     classID: 1
     script: {fileID: 0}
     flags: 0
