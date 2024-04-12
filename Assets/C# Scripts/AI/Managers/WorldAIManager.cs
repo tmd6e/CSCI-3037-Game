@@ -41,8 +41,11 @@ public class WorldAIManager : MonoBehaviour
         Debug.Log("Despawning all characters");
         foreach (var character in spawnedCharacters)
         {
-            character.GetComponent<NetworkObject>().Despawn();
-            Destroy(character.gameObject);
+            if (character.gameObject != null)
+            {
+                character.GetComponent<NetworkObject>().Despawn();
+                Destroy(character.gameObject);
+            }
         }
         spawnedCharacters.Clear();
     }

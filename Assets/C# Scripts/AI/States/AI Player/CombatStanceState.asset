@@ -16,6 +16,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7953f335aa27a44fa6dc28d50e7b658, type: 2}
   - {fileID: 11400000, guid: ff096c3fd6b8fda49910ff5dd1dcd857, type: 2}
   - {fileID: 11400000, guid: a2da6837c0f20e64793181389456be90, type: 2}
+  - {fileID: 11400000, guid: 982a251059482a24987bbc55f698dbd5, type: 2}
+  - {fileID: 11400000, guid: f494e8dbae18f2945bd407275666cd33, type: 2}
   canPerformCombo: 0
   chanceToPerformCombo: 25
   hasRolledForComboChance: 0

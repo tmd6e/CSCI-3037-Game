@@ -7,6 +7,7 @@ using static UnityEngine.ParticleSystem;
 
 public class ParticleHitboxInstantiator : MonoBehaviour
 {
+    public static List<GameObject> gameObjects = new List<GameObject>();
     [SerializeField] public GameObject hitbox;
     private ParticleSystem attackParticleSystem;
     ParticleSystem.Particle[] particles;
@@ -56,6 +57,7 @@ public class ParticleHitboxInstantiator : MonoBehaviour
     {
         numParticlesAlive = attackParticleSystem.GetParticles(particles);
         GameObject hitboxReference = null;
+        GameObject hitboxToRemove = null;
         // If particle numbers do not match hitbox numbers, correct this
         while (numParticlesAlive > spawnedHitboxes.Count)
         {
@@ -64,6 +66,7 @@ public class ParticleHitboxInstantiator : MonoBehaviour
             spawnedHitboxes.Add(
             hitboxReference
             );
+            gameObjects.Add(hitboxReference);
             Debug.Log("Spawning particles");
         }
 
@@ -71,8 +74,10 @@ public class ParticleHitboxInstantiator : MonoBehaviour
 
         while (numParticlesAlive < spawnedHitboxes.Count)
         {
-            Destroy(spawnedHitboxes[spawnedHitboxes.Count-1]);
+            hitboxToRemove = spawnedHitboxes[spawnedHitboxes.Count - 1];
+            Destroy(hitboxToRemove);
             spawnedHitboxes.RemoveAt(spawnedHitboxes.Count - 1);
+            gameObjects.Remove(hitboxToRemove);
         }
 
         yield return null;
@@ -95,5 +100,13 @@ public class ParticleHitboxInstantiator : MonoBehaviour
                 spawnedHitboxes[i].transform.position = attackParticleSystem.transform.localPosition + particle.position;
             }
         }
+    }
+
+    static public void RemoveAllHitboxes()
+    {
+        foreach (var instance in gameObjects) { 
+            Destroy(instance);
+        }
+        gameObjects.Clear();
     }
 }

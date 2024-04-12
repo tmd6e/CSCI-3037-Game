@@ -108,11 +108,15 @@ public class PlayerManager : CharacterManager
         }
 
         // Play SFX
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         WorldAIManager.instance.ResetAllCharacters();
+        ParticleHitboxInstantiator.RemoveAllHitboxes();
 
-        yield return new WaitForSeconds(1);
+        gameObject.transform.position = Vector3.zero;
+        WorldSoundFXManager.instance.globalAudioSource.clip = WorldSoundFXManager.instance.overworldMusic;
+        WorldSoundFXManager.instance.globalAudioSource.Play();
+        ReviveCharacter();
 
         
     }
