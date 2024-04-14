@@ -27,7 +27,15 @@ public class PlayerCombatManager : CharacterCombatManager
 
     public void EnableCanDoCombo() 
     {
+        if (player.playerNetworkManager.isUsingRightHand.Value)
+        {
             canComboWithMainHandWeapon = true;
+        } 
+        else
+        {
+            // Enable off hand combo
+        }
+            
     }
 
     public void DisableCanDoCombo() 
