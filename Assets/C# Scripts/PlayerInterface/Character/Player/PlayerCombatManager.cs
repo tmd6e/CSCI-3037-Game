@@ -41,5 +41,6 @@ public class PlayerCombatManager : CharacterCombatManager
     public void DisableCanDoCombo() 
     {
         canComboWithMainHandWeapon = false;
+        // canComboWithOffHandWeapon = false;
     }
 }
