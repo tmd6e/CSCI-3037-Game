@@ -20,4 +20,23 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
             player.transform.rotation *= player.animator.deltaRotation;
         }
     }
+
+    public void EnableCanDoCombo() 
+    {
+        if (player.playerNetworkManager.isUsingRightHand.Value)
+        {
+            canComboWithMainHandWeapon = true;
+        } 
+        else
+        {
+            // Enable off hand combo
+        }
+            
+    }
+
+    public void DisableCanDoCombo() 
+    {
+        canComboWithMainHandWeapon = false;
+        // canComboWithOffHandWeapon = false;
+    }
 }
