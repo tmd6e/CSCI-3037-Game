@@ -7,8 +7,8 @@ public class CharacterCombatManager : NetworkBehaviour
 {
     protected CharacterManager character;
 
-    [Header("Last Attack Animation Peerformed")]
-    public string lastAttackAnimationPerformed;
+    // [Header("Last Attack Animation Performed")]
+    // public string lastAttackAnimationPerformed;
 
     [Header("Attack Target")]
     public CharacterManager currentTarget;
