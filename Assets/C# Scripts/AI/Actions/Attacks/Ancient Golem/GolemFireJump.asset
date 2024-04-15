@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77a3ff9e8f7485a4aaa4fffd6ac1caec, type: 3}
-  m_Name: GolemSwordCombo
+  m_Name: GolemFireJump
   m_EditorClassIdentifier: 
-  attackAnimation: GolemSwordCombo
+  attackAnimation: GolemFireJump
   phaseRequired: 1
   comboAction: {fileID: 0}
   attackWeight: 75

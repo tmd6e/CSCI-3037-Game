@@ -142,8 +142,8 @@ public class PlayerInputManager : MonoBehaviour
             }
             lockOnCoroutine = StartCoroutine(PlayerCamera.instance.WaitThenFindNewTarget());
         }
-        // Are we already locked on?
-        if (lockOnInput && player.playerNetworkManager.isLockedOn.Value) {
+        // Are we already locked on or dead?
+        if (lockOnInput && player.playerNetworkManager.isLockedOn.Value || player.isDead.Value) {
             lockOnInput = false;
             PlayerCamera.instance.ClearLockOnTargets();
             player.playerNetworkManager.isLockedOn.Value = false;

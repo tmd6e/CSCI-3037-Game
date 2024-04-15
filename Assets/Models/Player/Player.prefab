@@ -2621,7 +2621,7 @@ MonoBehaviour:
   walkingSpeed: 1.5
   runningSpeed: 2.1
   rotationSpeed: 5
-  sprintingSpeed: 8
+  sprintingSpeed: 4
   sprintingStaminaCost: 15
   jumpStaminaCost: 25
   jumpHeight: 0.5
@@ -2816,6 +2816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   lockOnTransform: {fileID: 4793760556194843788}
+  canComboWithMainHandWeapon: 0
 --- !u!114 &287785856738249199
 MonoBehaviour:
   m_ObjectHideFlags: 0

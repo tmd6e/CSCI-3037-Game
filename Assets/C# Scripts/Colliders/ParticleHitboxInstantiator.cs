@@ -13,9 +13,15 @@ public class ParticleHitboxInstantiator : MonoBehaviour
     ParticleSystem.Particle[] particles;
     List<GameObject> spawnedHitboxes = new List<GameObject>();
     int numParticlesAlive;
+    [Header("Sounds")]
+    private AudioSource audioSource;
+    public AudioClip instantiateSound;
+    public bool generateSoundOnce = false;
+    
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         attackParticleSystem = GetComponent<ParticleSystem>();
         particles = new ParticleSystem.Particle[attackParticleSystem.main.maxParticles];
     }
@@ -61,6 +67,19 @@ public class ParticleHitboxInstantiator : MonoBehaviour
         // If particle numbers do not match hitbox numbers, correct this
         while (numParticlesAlive > spawnedHitboxes.Count)
         {
+            // If this is the first instance of the particle and the boolean is on, play the sound
+            // Check if the sound exists first
+            if (instantiateSound != null)
+            {
+                if (generateSoundOnce && spawnedHitboxes.Count == 1)
+                {
+                    audioSource.PlayOneShot(instantiateSound);
+                }
+            // Otherwise, if the boolean is off, play the sound each instance
+                if (!generateSoundOnce) { 
+                    audioSource.PlayOneShot(instantiateSound);
+                }
+            }
             hitboxReference = Instantiate(hitbox, attackParticleSystem.transform.position,
             Quaternion.identity);
             spawnedHitboxes.Add(
