@@ -13,7 +13,7 @@ public class PlayerCombatManager : CharacterCombatManager
     }
 
     [Header("Flags")]
-    public bool canComboWithMainHandWeapon = false;
+    // public bool canComboWithMainHandWeapon = false;
     // public bool canComboWithOffHandWeapon = false;
     
     public override void SetTarget(CharacterManager newTarget)
@@ -25,13 +25,22 @@ public class PlayerCombatManager : CharacterCombatManager
         }
     }
 
-    public void EnableCanDoCombo() 
+    /*public void EnableCanDoCombo() 
     {
+        if (player.playerNetworkManager.isUsingRightHand.Value)
+        {
             canComboWithMainHandWeapon = true;
+        } 
+        else
+        {
+            // Enable off hand combo
+        }
+            
     }
 
     public void DisableCanDoCombo() 
     {
         canComboWithMainHandWeapon = false;
-    }
+        // canComboWithOffHandWeapon = false;
+    }*/
 }
