@@ -21,7 +21,7 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
         }
     }
 
-    public void EnableCanDoCombo() 
+    /*public void EnableCanDoCombo() 
     {
         if (player.playerNetworkManager.isUsingRightHand.Value)
         {
@@ -38,5 +38,5 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
     {
         canComboWithMainHandWeapon = false;
         // canComboWithOffHandWeapon = false;
-    }
+    }*/
 }
