@@ -12,7 +12,7 @@ public class PlayerCombatManager : CharacterCombatManager
         player = GetComponent<PlayerManager>();
     }
 
-    [Header("Flags")]
+    //[Header("Flags")]
     // public bool canComboWithMainHandWeapon = false;
     // public bool canComboWithOffHandWeapon = false;
     
