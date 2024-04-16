@@ -42,10 +42,10 @@ public class AICharacterManager : CharacterManager
         // Make a copy so the original is not modified
         idle = Instantiate(idle);
         pursueTarget = Instantiate(pursueTarget);
-        foreverSpin = Instantiate(foreverSpin);
 
         if (currentState as ForeverSpinState != null)
         {
+            foreverSpin = Instantiate(foreverSpin);
             currentState = foreverSpin;
             return;
         }
