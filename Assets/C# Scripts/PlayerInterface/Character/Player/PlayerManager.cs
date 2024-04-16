@@ -96,7 +96,7 @@ public class PlayerManager : CharacterManager
             isDead.Value = true;
             canMove = false;
             canRotate = false;
-
+            
 
 
             // If not grounded, play aerial death

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: GolemFireball
   m_EditorClassIdentifier: 
   attackAnimation: GolemFireball
+  phaseRequired: 0
   comboAction: {fileID: 0}
-  attackWeight: 10
+  attackWeight: 25
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35
   maximumAttackAngle: 35

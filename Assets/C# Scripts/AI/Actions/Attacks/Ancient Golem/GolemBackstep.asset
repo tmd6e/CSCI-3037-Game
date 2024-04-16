@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GolemBackstep
   m_EditorClassIdentifier: 
   attackAnimation: Backstep
+  phaseRequired: 0
   comboAction: {fileID: 0}
   attackWeight: 50
   actionRecoveryTime: 1.5

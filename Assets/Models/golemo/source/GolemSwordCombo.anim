@@ -130084,6 +130084,27 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 2.1333334
+    functionName: PlaySound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: cf358435b1439d24e92f4981ec23b956, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3
+    functionName: PlaySound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: cf358435b1439d24e92f4981ec23b956, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.9
+    functionName: PlaySound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: cf358435b1439d24e92f4981ec23b956, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 4.4666667
     functionName: DisableCanRotate
     data: 

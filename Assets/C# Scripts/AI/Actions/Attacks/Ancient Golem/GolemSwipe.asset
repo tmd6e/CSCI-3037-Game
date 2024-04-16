@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: GolemSwipe
   m_EditorClassIdentifier: 
   attackAnimation: GolemSwipe
+  phaseRequired: 0
   comboAction: {fileID: 0}
   attackWeight: 75
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35
   maximumAttackAngle: 35
-  minimumAttackDistance: 8
+  minimumAttackDistance: 4
   maximumAttackDistance: 10

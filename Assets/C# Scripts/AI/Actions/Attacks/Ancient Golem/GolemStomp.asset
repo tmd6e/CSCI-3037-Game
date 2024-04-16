@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GolemStomp
   m_EditorClassIdentifier: 
   attackAnimation: GolemStomp
+  phaseRequired: 0
   comboAction: {fileID: 0}
   attackWeight: 50
   actionRecoveryTime: 1.5
