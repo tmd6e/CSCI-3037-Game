@@ -11,4 +11,9 @@ public class AICharacterLocomotionManager : CharacterLocomotionManager
             aiCharacter.transform.rotation = aiCharacter.navMeshAgent.transform.rotation;
         }
     }
+
+    public void RotateStationary(AICharacterManager aiCharacter)
+    {
+        aiCharacter.transform.Rotate(0.0f, 1.0f, 0.0f);
+    }
 }

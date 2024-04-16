@@ -27,6 +27,7 @@ public class AICharacterManager : CharacterManager
     public AttackState attack;
     public DeadState dead;
     public ToughnessBrokenState toughnessBrokenState;
+    public ForeverSpinState foreverSpin;
 
 
     protected override void Awake()
@@ -42,6 +43,12 @@ public class AICharacterManager : CharacterManager
         idle = Instantiate(idle);
         pursueTarget = Instantiate(pursueTarget);
 
+        if (currentState as ForeverSpinState != null)
+        {
+            foreverSpin = Instantiate(foreverSpin);
+            currentState = foreverSpin;
+            return;
+        }
         currentState = idle;
     }
 
