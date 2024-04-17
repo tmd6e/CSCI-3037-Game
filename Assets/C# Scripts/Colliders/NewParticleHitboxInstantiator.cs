@@ -116,8 +116,7 @@ public class NewParticleHitboxInstantiator : MonoBehaviour
 
             if (particle.remainingLifetime > 0)
             {
-                spawnedHitboxes[i].transform.position = 
-                    0 * attackParticleSystem.transform.position + particle.position;
+                spawnedHitboxes[i].transform.position = particle.position;
             }
         }
     }
