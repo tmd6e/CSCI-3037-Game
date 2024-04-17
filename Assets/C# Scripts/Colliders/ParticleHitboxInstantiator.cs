@@ -37,18 +37,6 @@ public class ParticleHitboxInstantiator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //numParticlesAlive = attackParticleSystem.GetParticles(particles);
-        //Debug.Log(numParticlesAlive);
-        //if (numParticlesAlive > 0)
-        //{
-        //    for (int i = 0; i < numParticlesAlive; i++)
-        //    {
-        //        StartCoroutine(InstantHitbox(particles[i].position + attackParticleSystem.transform.position, particles[i].remainingLifetime));
-        //    }
-        //}
-
-
-
         // Spawn / Destroy hitboxes to match live particles
         StartCoroutine(RegulateParticleMapping());
         // Once there are hitboxes, move them with the particles
