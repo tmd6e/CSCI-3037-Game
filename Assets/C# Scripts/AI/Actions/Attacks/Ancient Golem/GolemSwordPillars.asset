@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimation: GolemSwordPillars
   phaseRequired: 1
-  comboAction: {fileID: 0}
+  comboAction: {fileID: 11400000, guid: d8225d2bc06edc74a9b887b213693134, type: 2}
   attackWeight: 25
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35

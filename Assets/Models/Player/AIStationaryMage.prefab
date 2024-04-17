@@ -886,7 +886,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -1003,7 +1003,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.119201995, g: 0.015686259, b: 0.972549, a: 1}
+      maxColor: {r: 0.7684798, g: 0.740566, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -2148,7 +2148,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     mode: 0
     timeMode: 0
     fps: 30
@@ -2259,8 +2259,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 1
-    tilesY: 1
+    tilesX: 8
+    tilesY: 8
     animationType: 0
     rowIndex: 0
     cycles: 1
@@ -2271,7 +2271,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -2487,7 +2487,7 @@ ParticleSystem:
     orbitalY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5557,7 +5557,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0d6ca21eb3d8944469c3dd4fd7336073, type: 2}
+  - {fileID: 2100000, guid: 1f21c47ef527b3740ab59c76948fd1e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5620,9 +5620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f703b853bd556e1439facbb20b0acc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 1874970569673565930, guid: b0bd8ddfeb9a60e4f98433882023ac6c, type: 3}
+  hitbox: {fileID: 4165061016606704428, guid: e325eb54505b40c49b80de8af877834e, type: 3}
   instantiateSound: {fileID: 0}
   generateSoundOnce: 0
+  characterManager: {fileID: 0}
 --- !u!1 &1337831559793110963
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimation: RollForward
   phaseRequired: 0
-  comboAction: {fileID: 0}
+  comboAction: {fileID: 11400000, guid: ff096c3fd6b8fda49910ff5dd1dcd857, type: 2}
   attackWeight: 50
   actionRecoveryTime: 0
   minimumAttackAngle: -35

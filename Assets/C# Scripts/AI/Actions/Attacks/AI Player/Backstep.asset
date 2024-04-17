@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimation: Backstep
   phaseRequired: 0
-  comboAction: {fileID: 0}
+  comboAction: {fileID: 11400000, guid: a7953f335aa27a44fa6dc28d50e7b658, type: 2}
   attackWeight: 50
   actionRecoveryTime: 0
   minimumAttackAngle: -35

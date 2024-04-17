@@ -17,6 +17,8 @@ public class ParticleHitboxInstantiator : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip instantiateSound;
     public bool generateSoundOnce = false;
+    [Header("Character")]
+    [SerializeField] public CharacterManager characterManager; // Used for particle control on NPCs
     
 
     private void Awake()
@@ -24,6 +26,7 @@ public class ParticleHitboxInstantiator : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         attackParticleSystem = GetComponent<ParticleSystem>();
         particles = new ParticleSystem.Particle[attackParticleSystem.main.maxParticles];
+        characterManager = GetComponentInParent<CharacterManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,8 @@ public class ParticleHitboxInstantiator : MonoBehaviour
         //        StartCoroutine(InstantHitbox(particles[i].position + attackParticleSystem.transform.position, particles[i].remainingLifetime));
         //    }
         //}
+
+
 
         // Spawn / Destroy hitboxes to match live particles
         StartCoroutine(RegulateParticleMapping());
@@ -82,6 +87,7 @@ public class ParticleHitboxInstantiator : MonoBehaviour
             }
             hitboxReference = Instantiate(hitbox, attackParticleSystem.transform.position,
             Quaternion.identity);
+            hitboxReference.transform.SetParent(attackParticleSystem.transform, false);
             spawnedHitboxes.Add(
             hitboxReference
             );
@@ -107,16 +113,21 @@ public class ParticleHitboxInstantiator : MonoBehaviour
         numParticlesAlive = attackParticleSystem.GetParticles(particles);
 
         // If there is an inbalance between hitboxes and particles, do nothing
-        if (numParticlesAlive != spawnedHitboxes.Count) return;
+        if (numParticlesAlive != spawnedHitboxes.Count)
+        {
+            Debug.Log("IMBALANCE DETECTED, DO NOT MOVE");
+            return;
+        }
 
         // Move hitboxes with particles
         for (int i = 0; i < numParticlesAlive; i++)
         {
             ParticleSystem.Particle particle = particles[i];
 
-            if(particle.remainingLifetime > 0)
+            if (particle.remainingLifetime > 0)
             {
                 spawnedHitboxes[i].transform.position = attackParticleSystem.transform.localPosition + particle.position;
+                
             }
         }
     }

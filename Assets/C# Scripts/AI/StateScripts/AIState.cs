@@ -9,11 +9,6 @@ public class AIState : ScriptableObject
     {
         Debug.Log("WE ARE RUNNING THIS STATE");
 
-        //DO SOME LOGIC TO FIND THE PLAYER
-
-        // IF WE HAVE FOUND THE PLAYER, RETURN THE PURSUE TARGET STATE INSTEAD
-
-        // IF WE HAVE NOT FOUND THE PLAYER, CONTINUE TO RETURN IDLE STATE
         return this;
     }
 
@@ -24,7 +19,6 @@ public class AIState : ScriptableObject
     }
 
     protected virtual void ResetStateFlags(AICharacterManager aICharacter)
-    {
-        // RESET ANY STATE FLAGS HERE SO WHEN YOU RETURN TO THE STATE, THEY ARE BLANK ONCE AGAIN        
+    {   
     }
 }

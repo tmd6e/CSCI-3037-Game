@@ -43,8 +43,8 @@ public class AttackState : AIState
             if (currentAttack.comboAction != null)
             {
                 // If can combo
-                //hasPerformedCombo = true;
-                //currentAttack.comboAction.AttemptTOPerformAction(aiCharacter);
+                hasPerformedCombo = true;
+                currentAttack.comboAction.AttemptTOPerformAction(aiCharacter);
             }
         }
 
@@ -64,10 +64,6 @@ public class AttackState : AIState
 
             return this;
         }
-
-        //if (pivotAfterAttack) {
-        //    aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
-        //}
 
         return SwitchState(aiCharacter, aiCharacter.combatStance);
     }

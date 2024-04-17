@@ -56,8 +56,6 @@ public class TakeDamageEffect : InstantCharacterEffect
         // Play damage sound fx
 
         // Play damage vfx
-
-        // If character is an AI, check for new target if attacker is present
     }
 
     private void CalculateDamage(CharacterManager character) {

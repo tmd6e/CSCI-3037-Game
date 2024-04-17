@@ -649,6 +649,7 @@ MonoBehaviour:
   attack: {fileID: 11400000, guid: 4d2a4499bd33a7b4ab7b42685effa4c3, type: 2}
   dead: {fileID: 11400000, guid: 6ef5c44064258bd4daa066ae094ffd35, type: 2}
   toughnessBrokenState: {fileID: 0}
+  foreverSpin: {fileID: 0}
 --- !u!114 &6515626759137606115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5619,7 +5620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f703b853bd556e1439facbb20b0acc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 0}
+  hitbox: {fileID: 4165061016606704428, guid: e325eb54505b40c49b80de8af877834e, type: 3}
   instantiateSound: {fileID: 0}
   generateSoundOnce: 0
 --- !u!1 &1337831559793110963

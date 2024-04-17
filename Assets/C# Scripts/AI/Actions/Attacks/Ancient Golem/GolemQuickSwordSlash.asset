@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimation: GolemQuickSwordSlash
   phaseRequired: 1
-  comboAction: {fileID: 0}
+  comboAction: {fileID: 11400000, guid: ffe217e454449de41af1b2974731cabe, type: 2}
   attackWeight: 75
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35

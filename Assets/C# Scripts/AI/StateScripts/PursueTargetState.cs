@@ -9,11 +9,12 @@ public class PursueTargetState : AIState
 
     public override AIState Tick(AICharacterManager aICharacter)
     {
-
+        // SWITCH TO DEATH STATE IF DEAD
         if (aICharacter.isDead.Value)
         {
             return SwitchState(aICharacter, aICharacter.dead);
         }
+        // SWITCH TO TOUGHNESS BROKEN STATE IF AI HAS TOUGHNESS AND TOUGHNESS REACHES ZERO
         if (aICharacter.aiCharacterNetworkManager.currentToughness.Value <= 0 && aICharacter.aiCharacterNetworkManager.canBeBroken.Value)
         {
             return SwitchState(aICharacter, aICharacter.toughnessBrokenState);
@@ -42,21 +43,11 @@ public class PursueTargetState : AIState
 
         aICharacter.aiCharacterLocomotionManager.RotateTowardAgent(aICharacter);
         // IF WE ARE WITHIN COMBAT RANGE OF A TARGET, SWITCH STATE TO COMBAT STANCE STATE
-        // OPTION 01
-        //if (aICharacter.aiCharacterCombatManager.distanceFromTarget <= aICharacter.combatStance.maximumEngagementDistance) {
-        //    return SwitchState(aICharacter,aICharacter.combatStance);
-        //}
-        // OPTION 02
         if (aICharacter.aiCharacterCombatManager.distanceFromTarget <= aICharacter.navMeshAgent.stoppingDistance) { 
             return SwitchState(aICharacter, aICharacter.combatStance);
         }
-        // IF THE TARGET IS NOT REACHABLE, AND THEY ARE FAR AWAY, RETURN HOME
 
-        // PURSUE THE TARGET
-        // OPTION 01
-        //aICharacter.navMeshAgent.SetDestination(aICharacter.aiCharacterCombatManager.currentTarget.transform.position);
-
-        // OPTION 02
+        // FIND THE PATH
         NavMeshPath path = new NavMeshPath();
         aICharacter.navMeshAgent.CalculatePath(aICharacter.aiCharacterCombatManager.currentTarget.transform.position, path);
         aICharacter.navMeshAgent.SetPath(path);

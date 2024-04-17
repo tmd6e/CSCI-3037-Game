@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Rapid Punches
   m_EditorClassIdentifier: 
   attackAnimation: Rapid Punches
-  comboAction: {fileID: 0}
+  phaseRequired: 0
+  comboAction: {fileID: 11400000, guid: a2da6837c0f20e64793181389456be90, type: 2}
   attackWeight: 50
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35

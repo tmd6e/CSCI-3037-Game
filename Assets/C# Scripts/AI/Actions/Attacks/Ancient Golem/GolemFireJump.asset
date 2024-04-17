@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackAnimation: GolemFireJump
   phaseRequired: 1
-  comboAction: {fileID: 0}
+  comboAction: {fileID: 11400000, guid: 8553641eb09c73c4e9e8f6d62c2e28a0, type: 2}
   attackWeight: 25
   actionRecoveryTime: 1.5
   minimumAttackAngle: -35
