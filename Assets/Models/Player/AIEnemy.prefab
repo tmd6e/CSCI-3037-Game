@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1701204823
+  GlobalObjectIdHash: 951099334
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 1
@@ -626,6 +626,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterSoundManager: {fileID: 0}
   characterGroup: 1
   canRotate: 1
   canMove: 1
@@ -633,6 +634,15 @@ MonoBehaviour:
   isPerformingAction: 0
   isJumping: 0
   isGrounded: 1
+  damageSoundFX: {fileID: 8300000, guid: daa3755cfcd09b04b9831fcc5f5fc8f1, type: 3}
+  drops:
+  - {fileID: 8278274709194806448, guid: fd20205a9e2a2a940b7468621730e8af, type: 3}
+  - {fileID: 2034059892999930031, guid: 5f265f94f034a4b4e8ed0456aa9ef74e, type: 3}
+  - {fileID: 8646382371158903603, guid: 2436bb50492b5f044bd19ec081c62d2f, type: 3}
+  - {fileID: 3997303470308324221, guid: 106e2ce65a1b47646b4b9667671bd89b, type: 3}
+  - {fileID: 220018433030219811, guid: 2a8973dc53f5a6c4794ac5fb3c740a14, type: 3}
+  - {fileID: 7868223889501402885, guid: 6c0ca9c376dfc4747b10e8bd5d4168a8, type: 3}
+  dropChances: 0f0000000a00000005000000010000000100000001000000
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -645,6 +655,7 @@ MonoBehaviour:
   attack: {fileID: 11400000, guid: 4d2a4499bd33a7b4ab7b42685effa4c3, type: 2}
   dead: {fileID: 11400000, guid: 6ef5c44064258bd4daa066ae094ffd35, type: 2}
   toughnessBrokenState: {fileID: 0}
+  foreverSpin: {fileID: 0}
 --- !u!114 &6515626759137606115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,6 +670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   lockOnTransform: {fileID: 6207123105467936049}
+  phase2Triggered: 0
   actionRecoveryTimer: 0
   distanceFromTarget: 0
   viewableAngle: 0
@@ -779,10 +791,16 @@ MonoBehaviour:
     m_InternalValue: 1
   healthMultiplier:
     m_InternalValue: 1
+  attackMultiplier:
+    m_InternalValue: 1
+  breakMultiplier:
+    m_InternalValue: 1
+  attackSpeed:
+    m_InternalValue: 1
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 125
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 125
   currentStamina:
     m_InternalValue: 0
   maxStamina:

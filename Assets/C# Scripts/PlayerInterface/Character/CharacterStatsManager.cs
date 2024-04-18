@@ -33,7 +33,7 @@ public class CharacterStatsManager : MonoBehaviour
     {
         float stamina = 0;
 
-        stamina = 100 * staminaMultiplier;
+        stamina = 150 * staminaMultiplier;
 
         return Mathf.RoundToInt(stamina);
     }

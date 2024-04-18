@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
+    [Header("Collider Owner")]
+    CharacterManager damageSource;
     [Header("Damage")]
     public float physDamage = 0;
     public float magicDamage = 0;
@@ -18,6 +20,10 @@ public class DamageCollider : MonoBehaviour
     [Header("Characters Damaged")]
     protected List<CharacterManager> charactersDamaged = new List<CharacterManager>();
 
+    private void Awake()
+    {
+        damageSource = GetComponentInParent<CharacterManager>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         CharacterManager defender = other.GetComponent<CharacterManager>();
@@ -53,6 +59,12 @@ public class DamageCollider : MonoBehaviour
         //charactersDamaged.Add(defender);
 
         TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+        // Find the attacker if one exists
+        if (damageSource != null) {
+            Debug.Log("Source received!");
+            damageEffect.attacker = damageSource;
+        }
+
         damageEffect.physDamage = physDamage;
         damageEffect.magicDamage = magicDamage;
         damageEffect.fireDamage = fireDamage;

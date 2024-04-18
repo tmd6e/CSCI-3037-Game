@@ -21,6 +21,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
     [SerializeField] bool jumpInput = false;
+    [SerializeField] bool attackInput = false;
 
     [Header("Camera")]
     [SerializeField] Vector2 cameraAxis;
@@ -86,6 +87,9 @@ public class PlayerInputManager : MonoBehaviour
             // Sprint action
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+
+            // Attack action
+            playerControls.PlayerActions.Attack.performed += i => attackInput = true;
         }
 
         playerControls.Enable();
@@ -123,6 +127,15 @@ public class PlayerInputManager : MonoBehaviour
         HandleDodgeInput();
         HandleSprinting();
         HandleJumpInput();
+        HandleAttackInput();
+    }
+
+    private void HandleAttackInput() {
+        if (attackInput && !player.isDead.Value)
+        {
+            attackInput = false;
+            player.weaponController.SwordAttack();
+        }
     }
 
     private void HandleLockOnInput() {

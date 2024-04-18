@@ -11,13 +11,14 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PlayerNetworkManager playerNetworkManager;
     [HideInInspector] public PlayerStatsManager playerStatsManager;
     [HideInInspector] public PlayerCombatManager playerCombatManager;
+    [SerializeField] public WeaponController weaponController;
 
     protected override void Awake()
     {
         base.Awake();
 
         // Initialize player
-
+        weaponController = GetComponentInChildren<WeaponController>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerNetworkManager = GetComponent<PlayerNetworkManager>();
@@ -96,11 +97,11 @@ public class PlayerManager : CharacterManager
             isDead.Value = true;
             canMove = false;
             canRotate = false;
-            
+
 
 
             // If not grounded, play aerial death
-
+            animator.SetBool("Dead", true);
             if (!manuallySelectDeathAnimation)
             {
                 characterAnimatorManager.PlayTargetActionAnimation("Die", true);
@@ -129,9 +130,9 @@ public class PlayerManager : CharacterManager
             isDead.Value = false;
             playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
             playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
-            // Restore FP
 
             // Play VFX and exit death state
+            animator.SetBool("Dead", false);
             playerAnimatorManager.PlayTargetActionAnimation("Idle", false, false, true, true);
 
         }

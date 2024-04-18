@@ -43,7 +43,6 @@ public class TakeDamageEffect : InstantCharacterEffect
         if (character.isDead.Value) {
             return;
         }
-        // Check for i-frames
 
         // Calculate damage
         CalculateDamage(character);
@@ -54,6 +53,7 @@ public class TakeDamageEffect : InstantCharacterEffect
         // Check for status effect build-up
 
         // Play damage sound fx
+        character.characterSoundManager.PlaySound(character.damageSoundFX);
 
         // Play damage vfx
     }
@@ -62,9 +62,7 @@ public class TakeDamageEffect : InstantCharacterEffect
         if (!character.IsOwner) {
             return;
         }
-        if (attacker != null) { 
-            // Modify base damage based on powerups and attributes
-        }
+        
 
         // Check character's flat defense from powerups
 
@@ -72,6 +70,14 @@ public class TakeDamageEffect : InstantCharacterEffect
 
         // Add damage types together for final damage
         finalDamage = Mathf.RoundToInt(physDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
+
+        // Consider if there is an attacker
+        if (attacker != null)
+        {
+            // Modify base damage based on powerups and attributes
+            finalDamage *= (int) attacker.characterNetworkManager.attackMultiplier.Value;
+            toughnessDamage *= (int) attacker.characterNetworkManager.breakMultiplier.Value;
+        }
 
         // Consider if the character has toughness
         if (character.characterNetworkManager.canBeBroken.Value) {
@@ -86,7 +92,7 @@ public class TakeDamageEffect : InstantCharacterEffect
         if (finalDamage <= 0) {
             finalDamage = 1;
         }
-
+        Debug.Log(finalDamage);
         character.characterNetworkManager.currentHealth.Value -= finalDamage;
         if (character.characterNetworkManager.canBeBroken.Value)
         {

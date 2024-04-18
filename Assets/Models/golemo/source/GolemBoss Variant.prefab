@@ -9742,6 +9742,7 @@ MonoBehaviour:
   hitbox: {fileID: 5678778885755079322, guid: a832f5dc4e14c634e9875d88b2be2166, type: 3}
   instantiateSound: {fileID: 0}
   generateSoundOnce: 0
+  characterManager: {fileID: 0}
 --- !u!1 &485886872465095610
 GameObject:
   m_ObjectHideFlags: 0
@@ -19499,6 +19500,7 @@ MonoBehaviour:
   hitbox: {fileID: 5678778885755079322, guid: d1d6f8930f49e284dbbae0ba2f5faaef, type: 3}
   instantiateSound: {fileID: 0}
   generateSoundOnce: 0
+  characterManager: {fileID: 0}
 --- !u!1 &667762264174679309
 GameObject:
   m_ObjectHideFlags: 0
@@ -43820,6 +43822,7 @@ MonoBehaviour:
   hitbox: {fileID: 5678778885755079322, guid: d1d6f8930f49e284dbbae0ba2f5faaef, type: 3}
   instantiateSound: {fileID: 0}
   generateSoundOnce: 0
+  characterManager: {fileID: 0}
 --- !u!1 &2552214308105432914
 GameObject:
   m_ObjectHideFlags: 0
@@ -102230,6 +102233,7 @@ MonoBehaviour:
   hitbox: {fileID: 5678778885755079322, guid: d1d6f8930f49e284dbbae0ba2f5faaef, type: 3}
   instantiateSound: {fileID: 0}
   generateSoundOnce: 0
+  characterManager: {fileID: 0}
 --- !u!1 &6444467153779212764
 GameObject:
   m_ObjectHideFlags: 0
@@ -141380,6 +141384,7 @@ MonoBehaviour:
   hitbox: {fileID: 5678778885755079322, guid: a832f5dc4e14c634e9875d88b2be2166, type: 3}
   instantiateSound: {fileID: 0}
   generateSoundOnce: 0
+  characterManager: {fileID: 0}
 --- !u!1 &8282220993607271795
 GameObject:
   m_ObjectHideFlags: 0
@@ -161250,6 +161255,10 @@ MonoBehaviour:
     m_InternalValue: 1
   healthMultiplier:
     m_InternalValue: 1
+  attackMultiplier:
+    m_InternalValue: 1
+  breakMultiplier:
+    m_InternalValue: 1
   currentHealth:
     m_InternalValue: 2500
   maxHealth:
@@ -161363,6 +161372,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterSoundManager: {fileID: 0}
   characterGroup: 1
   canRotate: 1
   canMove: 1
@@ -161370,6 +161380,9 @@ MonoBehaviour:
   isPerformingAction: 0
   isJumping: 0
   isGrounded: 1
+  damageSoundFX: {fileID: 8300000, guid: fe3f34f0a4c8377439899b704e108e71, type: 3}
+  drops: []
+  dropChances: 
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -161382,6 +161395,7 @@ MonoBehaviour:
   attack: {fileID: 11400000, guid: 5879581411041654dbd824a594b42484, type: 2}
   dead: {fileID: 11400000, guid: e05efeb0598f8634c89077ae9bf05900, type: 2}
   toughnessBrokenState: {fileID: 11400000, guid: 83cc49328000c1a4c932bd7fbcfc121a, type: 2}
+  foreverSpin: {fileID: 0}
   bossID: 0
   hasBeenDefeated: 0
 --- !u!114 &4324051328572963532

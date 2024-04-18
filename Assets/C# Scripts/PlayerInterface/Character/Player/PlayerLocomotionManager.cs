@@ -14,11 +14,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Movement Settings")]
     private Vector3 moveDirection;
     private Vector3 targetRotationDirection;
-    [SerializeField] float walkingSpeed = 2;
-    [SerializeField] float runningSpeed = 5;
-    [SerializeField] float rotationSpeed = 5;
-    [SerializeField] float sprintingSpeed = 8;
-    [SerializeField] float sprintingStaminaCost = 2.0f;
+    [SerializeField] public float walkingSpeed = 2;
+    [SerializeField] public float runningSpeed = 5;
+    [SerializeField] public float rotationSpeed = 5;
+    [SerializeField] public float sprintingSpeed = 8;
+    [SerializeField] public float sprintingStaminaCost = 2.0f;
 
     [Header("Jump")]
     [SerializeField] float jumpStaminaCost = 25;

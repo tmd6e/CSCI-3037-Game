@@ -4,35 +4,39 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public GameObject Sword;
+    [SerializeField] private CharacterManager character;
+    [SerializeField] private Animator anim;
+    public float attackStaminaCost = 10;
     public bool CanAttack = true;
     public float AttackCooldown = 1.0f;
     public float AttackDuration = 1.0f;
     public bool IsAttacking = false;
 
+    private void Awake()
+    {
+        // Retrieve character animator
+        anim = GetComponentInParent<Animator>();
+        character = GetComponentInParent<CharacterManager>();
+
+    }
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            if(CanAttack)
-            {
-                SwordAttack();
-            }
-        }
     }
 
     public void SwordAttack()
     {
-        IsAttacking = true;
-        CanAttack = false;
-        Debug.Log("Player is attacking");
+        // Change attack speed based on buffs
+        character.animator.SetFloat("AttackSpeed", character.characterNetworkManager.attackSpeed.Value);
+        // Call the routine if stamina is sufficient
+        if (character.characterNetworkManager.currentStamina.Value >= attackStaminaCost)
+        {
+            IsAttacking = true;
+            CanAttack = false;
+            Debug.Log("Player is attacking");
 
-
-        /* Psuedocode once sword animation is made
-        Animator anim = Sword.GetComponent<Animator>();
-        anim.SetTrigger("Attack");
-        */
-        StartCoroutine(AttackRoutine());
+            anim.SetTrigger("Attack");
+            StartCoroutine(AttackRoutine());
+        }
     }
 
     // Must reset bool variable CanAttack to true

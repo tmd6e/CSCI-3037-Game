@@ -17,6 +17,7 @@ public class CharacterManager : NetworkBehaviour
     [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
     [HideInInspector] public CharacterCombatManager characterCombatManager;
     [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
+    [HideInInspector] public CharacterSoundManager characterSoundManager;
 
     [Header("Character Group")]
     public CharacterGroup characterGroup;
@@ -28,6 +29,13 @@ public class CharacterManager : NetworkBehaviour
     public bool isPerformingAction = false;
     public bool isJumping = false;
     public bool isGrounded = true;
+
+    [Header("Audio")]
+    public AudioClip damageSoundFX;
+
+    [Header("Drops")]
+    public GameObject[] drops;
+    public int[] dropChances;
 
 
     protected virtual void Awake()
@@ -41,6 +49,7 @@ public class CharacterManager : NetworkBehaviour
         characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         characterCombatManager = GetComponent<CharacterCombatManager>();
         characterLocomotionManager = GetComponent<CharacterLocomotionManager>();
+        characterSoundManager = GetComponent<CharacterSoundManager>();
     }
 
     protected virtual void Update() {
@@ -99,16 +108,30 @@ public class CharacterManager : NetworkBehaviour
             canMove = false;
             canRotate = false;
 
-            
+
 
             // If not grounded, play aerial death
-
+            animator.SetBool("Dead", true);
             if (!manuallySelectDeathAnimation) {
                 characterAnimatorManager.PlayTargetActionAnimation("Die", true);
             }
         }
 
         // Award players powerups
+        int dropChance;
+        Vector3 dropPos;
+        bool powerupDropped = false;
+        for(int i = 0; i < drops.Length; i++) {
+            dropChance = Random.Range(0, 100);
+            if (dropChance <= dropChances[i] && !powerupDropped)
+            {
+                dropPos = transform.position;
+                Debug.Log("Dropping powerup");
+                dropPos.y += 0.845f;
+                GameObject powerup = Instantiate(drops[i], dropPos, transform.rotation);
+                powerupDropped = true;
+            }
+        }
         yield return new WaitForSeconds(3);
         
 
