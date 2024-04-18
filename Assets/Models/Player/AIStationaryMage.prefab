@@ -631,6 +631,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterSoundManager: {fileID: 0}
   characterGroup: 1
   canRotate: 1
   canMove: 1
@@ -638,6 +639,15 @@ MonoBehaviour:
   isPerformingAction: 0
   isJumping: 0
   isGrounded: 1
+  damageSoundFX: {fileID: 0}
+  drops:
+  - {fileID: 3450531035147943727, guid: 79e10412702f402409da5d28cce69fdb, type: 3}
+  - {fileID: 8278274709194806448, guid: fd20205a9e2a2a940b7468621730e8af, type: 3}
+  - {fileID: 3997303470308324221, guid: 106e2ce65a1b47646b4b9667671bd89b, type: 3}
+  - {fileID: 2034059892999930031, guid: 5f265f94f034a4b4e8ed0456aa9ef74e, type: 3}
+  - {fileID: 601810993924729422, guid: de1bc5bc3f1b14346aedeb3da91db238, type: 3}
+  - {fileID: 8646382371158903603, guid: 2436bb50492b5f044bd19ec081c62d2f, type: 3}
+  dropChances: 230000001400000003000000140000000100000001000000
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -785,6 +795,12 @@ MonoBehaviour:
   staminaMultiplier:
     m_InternalValue: 1
   healthMultiplier:
+    m_InternalValue: 1
+  attackMultiplier:
+    m_InternalValue: 1
+  breakMultiplier:
+    m_InternalValue: 1
+  attackSpeed:
     m_InternalValue: 1
   currentHealth:
     m_InternalValue: 0
