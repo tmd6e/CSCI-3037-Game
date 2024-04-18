@@ -17,14 +17,58 @@ public class PowerupEffect : MonoBehaviour
     {
         player = other.GetComponent<PlayerManager>();
         if (player != null && !powerupProcced) {
-            player.playerNetworkManager.attackMultiplier.Value += attackBoost;
-            player.playerNetworkManager.breakMultiplier.Value += breakBoost;
-            player.playerNetworkManager.healthMultiplier.Value += healthBoost;
-            player.playerNetworkManager.staminaMultiplier.Value += staminaBoost;
-            player.playerNetworkManager.attackSpeed.Value += attackSpeedBoost;
-            player.playerLocomotionManager.walkingSpeed += speedBoost;
-            player.playerLocomotionManager.runningSpeed += speedBoost;
-            player.playerLocomotionManager.sprintingSpeed += speedBoost;
+            if (player.playerNetworkManager.attackMultiplier.Value + attackBoost > 0) 
+            {
+                player.playerNetworkManager.attackMultiplier.Value += attackBoost;
+            }
+            else {
+                player.playerNetworkManager.attackMultiplier.Value = 0.1f;
+            }
+
+            if (player.playerNetworkManager.breakMultiplier.Value + breakBoost > 0)
+            {
+                player.playerNetworkManager.breakMultiplier.Value += breakBoost;
+            }
+            else {
+                player.playerNetworkManager.breakMultiplier.Value = 0.1f;
+            }
+            
+            if (player.playerNetworkManager.healthMultiplier.Value + healthBoost > 0)
+            {
+                player.playerNetworkManager.healthMultiplier.Value += healthBoost;
+            }
+            else {
+                player.playerNetworkManager.healthMultiplier.Value = 0.05f;
+            }
+
+            if (player.playerNetworkManager.staminaMultiplier.Value + staminaBoost > 0)
+            {
+                player.playerNetworkManager.staminaMultiplier.Value += staminaBoost;
+            }
+            else
+            {
+                player.playerNetworkManager.staminaMultiplier.Value = 0.05f;
+            }
+
+            if (player.playerNetworkManager.attackSpeed.Value + attackSpeedBoost > 0)
+            {
+                player.playerNetworkManager.attackSpeed.Value += attackSpeedBoost;
+            }
+
+            if (player.playerLocomotionManager.walkingSpeed + speedBoost > 0) {
+                player.playerLocomotionManager.walkingSpeed += speedBoost;
+            }
+
+            if (player.playerLocomotionManager.runningSpeed + speedBoost > 0)
+            {
+                player.playerLocomotionManager.runningSpeed += speedBoost;
+            }
+
+            if (player.playerLocomotionManager.sprintingSpeed + speedBoost > 0)
+            {
+                player.playerLocomotionManager.sprintingSpeed += speedBoost;
+            }
+
             powerupProcced = true;
             Destroy(gameObject);
         }
