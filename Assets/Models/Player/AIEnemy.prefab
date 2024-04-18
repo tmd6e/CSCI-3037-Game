@@ -644,7 +644,7 @@ MonoBehaviour:
   - {fileID: 7868223889501402885, guid: 6c0ca9c376dfc4747b10e8bd5d4168a8, type: 3}
   - {fileID: 220018433030219811, guid: 2a8973dc53f5a6c4794ac5fb3c740a14, type: 3}
   - {fileID: 601810993924729422, guid: de1bc5bc3f1b14346aedeb3da91db238, type: 3}
-  dropChances: 0f0000000f0000000a0000000500000005000000030000000100000001000000
+  dropChances: 0f0000000f0000000a0000000500000001000000030000000100000001000000
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}

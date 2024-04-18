@@ -975,6 +975,7 @@ MonoBehaviour:
   dodgeInput: 0
   sprintInput: 0
   jumpInput: 0
+  attackInput: 0
   cameraAxis: {x: 0, y: 0}
   camHorizontalInput: 0
   camVerticalInput: 0

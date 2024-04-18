@@ -8,6 +8,7 @@ public class CharacterManager : NetworkBehaviour
     [Header("Status")]
     public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isBroken = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    bool powerupDropped = false;
 
     [HideInInspector] public CharacterController characterController;
     [HideInInspector] public Animator animator;
@@ -120,7 +121,7 @@ public class CharacterManager : NetworkBehaviour
         // Award players powerups
         int dropChance;
         Vector3 dropPos;
-        bool powerupDropped = false;
+        
         for(int i = 0; i < drops.Length; i++) {
             dropChance = Random.Range(0, 100);
             if (dropChance <= dropChances[i] && !powerupDropped)

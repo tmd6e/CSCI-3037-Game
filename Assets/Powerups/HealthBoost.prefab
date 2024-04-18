@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackBoost: 0
   breakBoost: 0
-  healthBoost: 0.15
+  healthBoost: 0.05
   staminaBoost: 0
   speedBoost: 0
   attackSpeedBoost: 0

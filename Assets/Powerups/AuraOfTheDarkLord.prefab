@@ -69,12 +69,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30cb6da644a75a4cad5550f474e473f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackBoost: 12
-  breakBoost: 12
-  healthBoost: 12
-  staminaBoost: 12
-  speedBoost: 10
-  attackSpeedBoost: 6
+  attackBoost: 0.2
+  breakBoost: 0.5
+  healthBoost: 1
+  staminaBoost: 1
+  speedBoost: 1
+  attackSpeedBoost: 0.3
   powerupProcced: 0
 --- !u!1 &2772298544824976513
 GameObject:

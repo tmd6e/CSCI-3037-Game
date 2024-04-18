@@ -439,6 +439,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDead:
     m_InternalValue: 0
+  isBroken:
+    m_InternalValue: 0
   characterController: {fileID: 0}
   animator: {fileID: 0}
   characterNetworkManager: {fileID: 0}
@@ -446,6 +448,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterSoundManager: {fileID: 0}
   characterGroup: 0
   canRotate: 1
   canMove: 1
@@ -453,6 +456,10 @@ MonoBehaviour:
   isPerformingAction: 0
   isJumping: 0
   isGrounded: 1
+  damageSoundFX: {fileID: 0}
+  drops:
+  - {fileID: 3450531035147943727, guid: 79e10412702f402409da5d28cce69fdb, type: 3}
+  dropChances: 64000000
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -464,6 +471,8 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: c8ab05cbfb7d70346b04358e636acc51, type: 2}
   attack: {fileID: 11400000, guid: 4d2a4499bd33a7b4ab7b42685effa4c3, type: 2}
   dead: {fileID: 11400000, guid: 6ef5c44064258bd4daa066ae094ffd35, type: 2}
+  toughnessBrokenState: {fileID: 0}
+  foreverSpin: {fileID: 0}
 --- !u!114 &4693416249949556507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   lockOnTransform: {fileID: 8384535974212913795}
+  phase2Triggered: 0
   actionRecoveryTimer: 0
   distanceFromTarget: 0
   viewableAngle: 0
@@ -598,10 +608,16 @@ MonoBehaviour:
     m_InternalValue: 1
   healthMultiplier:
     m_InternalValue: 1
+  attackMultiplier:
+    m_InternalValue: 1
+  breakMultiplier:
+    m_InternalValue: 1
+  attackSpeed:
+    m_InternalValue: 1
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 100
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 100
   currentStamina:
     m_InternalValue: 0
   maxStamina:

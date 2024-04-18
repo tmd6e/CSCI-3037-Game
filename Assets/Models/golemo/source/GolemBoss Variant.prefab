@@ -9813,7 +9813,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6
+  m_Radius: 5.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &586789679700803974
 GameObject:
@@ -161258,6 +161258,8 @@ MonoBehaviour:
   attackMultiplier:
     m_InternalValue: 1
   breakMultiplier:
+    m_InternalValue: 1
+  attackSpeed:
     m_InternalValue: 1
   currentHealth:
     m_InternalValue: 2500

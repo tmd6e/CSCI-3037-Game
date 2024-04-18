@@ -7,7 +7,10 @@ public class IdleState : AIState
 {
     public override AIState Tick(AICharacterManager aICharacter)
     {
-        //aICharacter.characterNetworkManager.isMoving.Value = false;
+        //if (aICharacter.aiCharacterCombatManager.currentTarget == null) {
+        //    aICharacter.characterNetworkManager.isMoving.Value = false;
+        //}
+        
         if (aICharacter.isDead.Value)
         {
             return SwitchState(aICharacter, aICharacter.dead);
