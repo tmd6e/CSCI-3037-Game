@@ -2766,6 +2766,8 @@ MonoBehaviour:
     m_InternalValue: 1
   breakMultiplier:
     m_InternalValue: 1
+  attackSpeed:
+    m_InternalValue: 1
   currentHealth:
     m_InternalValue: 0
   maxHealth:
@@ -2972,8 +2974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5dfea2f98fc8a408bcaffbb3ab8bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaRegenRate: 2
-  regenDelay: 2
+  staminaRegenRate: 6
+  regenDelay: 1.2
 --- !u!114 &6396877104491499240
 MonoBehaviour:
   m_ObjectHideFlags: 0
