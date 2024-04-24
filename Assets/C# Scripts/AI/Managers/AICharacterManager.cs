@@ -80,12 +80,6 @@ public class AICharacterManager : CharacterManager
     private void ProcessStateMachine()
     {
         
-        //Debug.Log("STATE MACHINE");
-        //AIState nextState = null;
-        //if (currentState != null)
-        //{
-        //    nextState = currentState.Tick(this);
-        //}
         AIState nextState = currentState?.Tick(this);
         if (nextState != null)
         {
